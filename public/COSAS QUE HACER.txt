@@ -1,0 +1,7 @@
+- Obtener el nombre y ubicación de los tres últimos restaurantes dados de alta, de manera que en home salgan fotos de esos restaurantes y su nombre. 
+
+- Seccion opinión en la que los usuarios ponen su opinion acerca de esta app con la opción de valorarlo con 1 a 5 estrellas. Se guardan en una tabla por fecha
+de manera que las tres últimas opiniones se visualizarán en home. 
+
+- Si el combo de restaurante está seleccionado en sign up, al hacer log in, te dará opciones de añadir restaurante, menus... 
+- Si el combo no está seleccionado, al hacer login, te dará opciones de ver calendario, reservar, modificar reserva y ver menus. 

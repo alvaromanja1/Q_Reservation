@@ -33,8 +33,17 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 </head>
+    <script>
+        
+        function validateInfo(){
+            var username = document.getElementById("usernameField").value;
+            //window.location.href = "indexClient.html?username=" +username;
+            location.href = "indexClient.html?username=" +username;
+        }
+        
+    </script>
 <body class="animsition">
-
+    
 	<!-- Header -->
 	<header>
 		<!-- Header desktop -->
@@ -179,7 +188,7 @@
 								</span>
 
 								<div class="wrap-inputname size12 bo2 bo-rad-10 m-t-3 m-b-23">
-									<input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="name" placeholder="Username">
+									<input id="usernameField" class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="username" placeholder="Username">
 								</div>
 							</div>
                         </div>
@@ -196,18 +205,16 @@
 								</span>
 
 								<div class="wrap-inputphone size12 bo2 bo-rad-10 m-t-3 m-b-23">
-									<input class="bo-rad-10 sizefull txt10 p-l-20" type="password" name="phone" placeholder="Password">
+									<input class="bo-rad-10 sizefull txt10 p-l-20" type="password" placeholder="Password">
 								</div>
 							</div>
                         </div>
 
-						<div class="wrap-btn-booking flex-c-m m-t-6">
-							<!-- Button3 -->
-							<button type="submit" class="btn3 flex-c-m size13 txt11 trans-0-4">
-								Log In
-							</button>
-						</div>
+						
 					</form>
+                        <button type="submit" id="logB" class="btn3 flex-c-m size13 txt11 trans-0-4" onclick="validateInfo()" >
+								Log In
+				        </button>
 				</div>
 			</div>
 

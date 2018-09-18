@@ -1681,3 +1681,13 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
+.profileImage{
+  max-width:120px;
+  max-height: 120px;
+  border-radius: 50%;
+}
+input[type=file]{
+padding:10px;
+
+}

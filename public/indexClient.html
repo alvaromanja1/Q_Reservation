@@ -31,6 +31,26 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 </head>
+    
+<script>
+    function getQueryVariable(variable)
+    {
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+    }
+    
+    window.onload = function() {
+      var a = getQueryVariable("username");
+      document.getElementById("test").innerHTML = a;
+      document.getElementById("test2").innerHTML = a;
+      document.getElementById("test3").innerHTML = a;
+    };
+</script>    
 <body class="animsition">
 
 	<!-- Header -->
@@ -201,15 +221,13 @@
 						<span class="caption1-slide1 txt1 t-center animated visible-false m-b-15" data-appear="fadeInDown">
 							Hi,
 						</span>
-
-						<h2 class="caption2-slide1 tit1 t-center animated visible-false m-b-37" data-appear="fadeInUp">
-							Q Reservation
-						</h2>
-
+                        <div class="caption2-slide1 tit1 t-center animated visible-false m-b-37" data-appear="fadeInUp" id="test">
+                        </div>
+                        
 						<div class="wrap-btn-slide1 animated visible-false" data-appear="zoomIn">
 							<!-- Button1 -->
-							<a href="logIn.html" class="btn1 flex-c-m size1 txt3 trans-0-4">
-								Log In
+							<a href="reservation.html" class="btn1 flex-c-m size1 txt3 trans-0-4">
+								Reservation
 							</a>
 						</div>
 					</div>
@@ -218,17 +236,16 @@
 				<div class="item-slick1 item2-slick1" style="background-image: url(images/slideMexican.jpg);">
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<span class="caption1-slide1 txt1 t-center animated visible-false m-b-15" data-appear="rollIn">
-							Welcome to
+							Hi,
 						</span>
 
-						<h2 class="caption2-slide1 tit1 t-center animated visible-false m-b-37" data-appear="lightSpeedIn">
-							Q Reservation
-						</h2>
+						<div class="caption2-slide1 tit1 t-center animated visible-false m-b-37" data-appear="fadeInUp" id="test2">
+                        </div>
 
 						<div class="wrap-btn-slide1 animated visible-false" data-appear="slideInUp">
 							<!-- Button1 -->
-							<a href="logIn.html" class="btn1 flex-c-m size1 txt3 trans-0-4">
-								Log In
+							<a href="reservation.html" class="btn1 flex-c-m size1 txt3 trans-0-4">
+								Reservation
 							</a>
 						</div>
 					</div>
@@ -237,17 +254,16 @@
 				<div class="item-slick1 item3-slick1" style="background-image: url(images/slideSushi.jpg);">
 					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
 						<span class="caption1-slide1 txt1 t-center animated visible-false m-b-15" data-appear="rotateInDownLeft">
-							Welcome to
+							Hi,
 						</span>
 
-						<h2 class="caption2-slide1 tit1 t-center animated visible-false m-b-37" data-appear="rotateInUpRight">
-							Q Reservation
-						</h2>
+						<div class="caption2-slide1 tit1 t-center animated visible-false m-b-37" data-appear="fadeInUp" id="test3">
+                        </div>
 
 						<div class="wrap-btn-slide1 animated visible-false" data-appear="rotateIn">
 							<!-- Button1 -->
-							<a href="logIn.html" class="btn1 flex-c-m size1 txt3 trans-0-4">
-								Log In
+							<a href="reservation.html" class="btn1 flex-c-m size1 txt3 trans-0-4">
+								Reservation
 							</a>
 						</div>
 					</div>

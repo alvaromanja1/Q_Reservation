@@ -677,6 +677,22 @@ input[type="date" i] {
   border-bottom: 2px solid white;
 }
 
+.btn-show-sidebar2 {
+  width: 26px;
+  height: 15px;
+  
+}
+
+.header-fixed .btn-show-sidebar2 {
+  border-top: 2px solid #222222;
+  border-bottom: 2px solid #222222;
+}
+
+.btn-show-sidebar:hover {
+  border-top: 2px solid #ec1d25;
+  border-bottom: 2px solid #ec1d25;
+}
+
 .header-fixed .btn-show-sidebar {
   border-top: 2px solid #222222;
   border-bottom: 2px solid #222222;
@@ -1690,4 +1706,41 @@ input:checked + .slider:before {
 input[type=file]{
 padding:10px;
 
+}
+.accountName{
+  color: white;  
+}
+.accountImg{
+  max-width:80px;
+  max-height: 80px;
+  border-radius: 50%;
+}
+.ec-stars-wrapper {
+	/* Espacio entre los inline-block (los hijos, los `a`) 
+	   http://ksesocss.blogspot.com/2012/03/display-inline-block-y-sus-empeno-en.html */
+	font-size: 0;
+	/* Podríamos quitarlo, 
+		pero de esta manera (siempre que no le demos padding), 
+		sólo aplicará la regla .ec-stars-wrapper:hover a cuando
+		también se esté haciendo hover a alguna estrella */
+	display: inline-block;
+}
+.ec-stars-wrapper a {
+	text-decoration: none;
+	display: inline-block;
+	/* Volver a dar tamaño al texto */
+	font-size: 32px;
+	font-size: 2rem;
+	
+	color: #888;
+}
+
+.ec-stars-wrapper:hover a {
+	color: rgb(39, 130, 228);
+}
+/*
+ * El selector de hijo, es necesario para aumentar la especifidad
+ */
+.ec-stars-wrapper > a:hover ~ a {
+	color: #888;
 }

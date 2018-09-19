@@ -33,6 +33,65 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 </head>
+    
+<script>
+    
+    
+    window.onload = function() {
+      var a = getQueryVariable("username");
+      document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
+    
+    };
+    function getQueryVariable(variable)
+    {
+       var query = window.location.search.substring(1);
+       var vars = query.split("&");
+       for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+       }
+       return(false);
+    }
+    
+    function navigateS(){
+        var a = getQueryVariable("username");
+        document.getElementById("navigationS").setAttribute('href', 'indexClient.html?username=' + a);
+    }
+    function navigateR(){
+        var a = getQueryVariable("username");
+        document.getElementById("navigationR").setAttribute('href', 'reservation.html?username=' + a);
+    }
+    function navigateR2(){
+        var a = getQueryVariable("username");
+        document.getElementById("navigationR2").setAttribute('href', 'reservation.html?username=' + a);
+    }
+    function navigateR3(){
+        var a = getQueryVariable("username");
+        document.getElementById("navigationR3").setAttribute('href', 'reservation.html?username=' + a);
+    }
+    function navigateR4(){
+        var a = getQueryVariable("username");
+        document.getElementById("navigationR4").setAttribute('href', 'reservation.html?username=' + a);
+    }
+    function navigateR5(){
+        var a = getQueryVariable("username");
+        document.getElementById("navigationR5").setAttribute('href', 'reservation.html?username=' + a);
+    }
+     function navigateM(){
+        var a = getQueryVariable("username");
+        document.getElementById("navigationM").setAttribute('href', 'menu.html?username=' + a);
+    }
+     function navigateMR(){
+        var a = getQueryVariable("username");
+        document.getElementById("navigationMR").setAttribute('href', 'manageReservations.html?username=' + a);
+    }
+     function navigateRA(){
+        var a = getQueryVariable("username");
+        document.getElementById("navigationRA").setAttribute('href', 'rateApp.html?username=' + a);
+    }
+    
+    
+</script>    
 <body class="animsition">
 
 	<!-- Header -->
@@ -44,7 +103,7 @@
 					<!-- Logo -->
 					<div class="logo">
 						<a href="index.html">
-							<img src="images/icons/logo.png" alt="IMG-LOGO" data-logofixed="images/icons/logo2.png">
+							<img src="images/icons/logoQR.png" alt="IMG-LOGO" data-logofixed="images/icons/logoQR.png">
 						</a>
 					</div>
 
@@ -53,43 +112,39 @@
 						<nav class="menu">
 							<ul class="main_menu">
 								<li>
-									<a href="index.html">Home</a>
+									<a onclick="navigateS()" id="navigationS" href="indexClient.html">Home</a>
 								</li>
-
-								<li>
-									<a href="menu.html">Menu</a>
+                                <li>
+									<a onclick="navigateR()" id="navigationR" href="reservation.html">Reservation</a>
 								</li>
-
-								<li>
-									<a href="reservation.html">Reservation</a>
+                                
+                                <li>
+									<a onclick="navigateM()" id="navigationM" href="menu.html">View Menu's</a>
 								</li>
-
-								<li>
-									<a href="gallery.html">Gallery</a>
+                                
+                                <li>
+									<a onclick="navigateMR()" id="navigationMR" href="manageReservations.html">Manage Reservations</a>
 								</li>
-
-								<li>
-									<a href="about.html">About</a>
+                                
+                                <li>
+									<a onclick="navigateRA()" id="navigationRA" href="rateApp.html">Rate this app</a>
 								</li>
-
-								<li>
-									<a href="blog.html">Blog</a>
-								</li>
-
-								<li>
-									<a href="contact.html">Contact</a>
-								</li>
+								
 							</ul>
 						</nav>
 					</div>
 
 					<!-- Social -->
 					<div class="social flex-w flex-l-m p-r-20">
-						<a href="#"><i class="fa fa-tripadvisor" aria-hidden="true"></i></a>
-						<a href="#"><i class="fa fa-facebook m-l-21" aria-hidden="true"></i></a>
-						<a href="#"><i class="fa fa-twitter m-l-21" aria-hidden="true"></i></a>
-
-						<button class="btn-show-sidebar m-l-33 trans-0-4"></button>
+                        
+                        <a><img id="accountImage" class="accountImg m-l-21" src="images/icons/faviconQR.png"></a>
+                        
+                        <div id="accountNameDiv" class="accountName m-l-33 trans-0-4">
+                            
+                        </div>
+						<button class="btn-show-sidebar m-l-33 trans-0-4">
+                        
+                        </button>
 					</div>
 				</div>
 			</div>
@@ -107,87 +162,34 @@
 				<a href="index.html" class="txt19">Home</a>
 			</li>
 
-			<li class="t-center m-b-13">
-				<a href="menu.html" class="txt19">Menu</a>
+            <li class="t-center m-b-13">
+				<a href="signIn.html" class="txt19">Manage Reservation</a>
 			</li>
-
-			<li class="t-center m-b-13">
-				<a href="gallery.html" class="txt19">Gallery</a>
+            
+            <li class="t-center m-b-13">
+				<a href="blog.html" class="txt19">Rate a Restaurant</a>
 			</li>
-
-			<li class="t-center m-b-13">
-				<a href="about.html" class="txt19">About</a>
+            
+            <li class="t-center m-b-13">
+				<a href="logIn.html" class="txt19">Change Password</a>
 			</li>
-
 			<li class="t-center m-b-13">
-				<a href="blog.html" class="txt19">Blog</a>
-			</li>
-
-			<li class="t-center m-b-33">
-				<a href="contact.html" class="txt19">Contact</a>
+				<a href="index.html" class="txt19">Log out</a>
 			</li>
 
 			<li class="t-center">
 				<!-- Button3 -->
-				<a href="reservation.html" class="btn3 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">
+				<a onclick="navigateR2()" id="navigationR2" href="reservation.html" class="btn3 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">
 					Reservation
 				</a>
 			</li>
 		</ul>
-
-		<!-- - -->
-		<div class="gallery-sidebar t-center p-l-60 p-r-60 p-b-40">
-			<!-- - -->
-			<h4 class="txt20 m-b-33">
-				Gallery
-			</h4>
-
-			<!-- Gallery -->
-			<div class="wrap-gallery-sidebar flex-w">
-				<a class="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-01.jpg" data-lightbox="gallery-footer">
-					<img src="images/photo-gallery-thumb-01.jpg" alt="GALLERY">
-				</a>
-
-				<a class="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-02.jpg" data-lightbox="gallery-footer">
-					<img src="images/photo-gallery-thumb-02.jpg" alt="GALLERY">
-				</a>
-
-				<a class="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-03.jpg" data-lightbox="gallery-footer">
-					<img src="images/photo-gallery-thumb-03.jpg" alt="GALLERY">
-				</a>
-
-				<a class="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-05.jpg" data-lightbox="gallery-footer">
-					<img src="images/photo-gallery-thumb-05.jpg" alt="GALLERY">
-				</a>
-
-				<a class="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-06.jpg" data-lightbox="gallery-footer">
-					<img src="images/photo-gallery-thumb-06.jpg" alt="GALLERY">
-				</a>
-
-				<a class="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-07.jpg" data-lightbox="gallery-footer">
-					<img src="images/photo-gallery-thumb-07.jpg" alt="GALLERY">
-				</a>
-
-				<a class="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-09.jpg" data-lightbox="gallery-footer">
-					<img src="images/photo-gallery-thumb-09.jpg" alt="GALLERY">
-				</a>
-
-				<a class="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-10.jpg" data-lightbox="gallery-footer">
-					<img src="images/photo-gallery-thumb-10.jpg" alt="GALLERY">
-				</a>
-
-				<a class="item-gallery-sidebar wrap-pic-w" href="images/photo-gallery-11.jpg" data-lightbox="gallery-footer">
-					<img src="images/photo-gallery-thumb-11.jpg" alt="GALLERY">
-				</a>
-			</div>
 		</div>
 	</aside>
-
-
 	<!-- Title Page -->
-	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(images/bg-title-page-01.jpg);">
+	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(images/slideMenu.jpg);">
 		<h2 class="tit6 t-center">
-			Pato Menu
+			AVAILABLE MENUS
 		</h2>
 	</section>
 
@@ -572,7 +574,7 @@
 
 	<!-- Lunch -->
 	<section class="section-lunch bgwhite">
-		<div class="header-lunch parallax0 parallax100" style="background-image: url(images/header-menu-01.jpg);">
+		<div class="header-lunch parallax0 parallax100" style="background-image: url(images/slideLunch.jpg);">
 			<div class="bg1-overlay t-center p-t-170 p-b-165">
 				<h2 class="tit4 t-center">
 					Lunch
@@ -718,7 +720,7 @@
 
 	<!-- Dinner -->
 	<section class="section-dinner bgwhite">
-		<div class="header-dinner parallax0 parallax100" style="background-image: url(images/header-menu-02.jpg);">
+		<div class="header-dinner parallax0 parallax100" style="background-image: url(images/slideDinner.jpg);">
 			<div class="bg1-overlay t-center p-t-170 p-b-165">
 				<h2 class="tit4 t-center">
 					Dinner

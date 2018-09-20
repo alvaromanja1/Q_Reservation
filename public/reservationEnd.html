@@ -89,6 +89,19 @@
         var a = getQueryVariable("username");
         document.getElementById("navigationRA").setAttribute('href', 'rateApp.html?username=' + a);
     }
+    function navigateCP(){
+        var a = getQueryVariable("username");
+        document.getElementById("navigationCP").setAttribute('href', 'changePassword.html?username=' + a);
+    }
+    function rand_NumeroAleatorio(){
+        var rand_NumeroAleatorio = Math.floor((999999999999999-4)*Math.random()) + 1;   
+        console.log(rand_NumeroAleatorio);
+        //Insertar en la tabla de BD:
+        //1. NUMERO ALEATORIO QUE ES EL ID DE LA RESERVA.
+        //2. RESTAURANTE DE LA RESERVA.
+        //3. DIA, HORA, PERSONAS, NOMBRE DE LA PERSONA, TELEFONO Y EMAIL. 
+        //4. NOMBRE DE USUARIO DE LA PERSONA QUE HACE LA RESERVA. 
+    }
     
     
 </script>    
@@ -171,7 +184,7 @@
 			</li>
             
             <li class="t-center m-b-13">
-				<a href="logIn.html" class="txt19">Change Password</a>
+				<a onclick="navigateCP()" id="navigationCP" href="changePassword.html" class="txt19">Change Password</a>
 			</li>
 			<li class="t-center m-b-13">
 				<a href="index.html" class="txt19">Log out</a>
@@ -321,7 +334,7 @@
 
 						<div class="wrap-btn-booking flex-c-m m-t-6">
 							<!-- Button3 -->
-							<button type="submit" class="btn3 flex-c-m size13 txt11 trans-0-4">
+							<button  onclick="rand_NumeroAleatorio()" type="submit" class="btn3 flex-c-m size13 txt11 trans-0-4">
 								Book Table
 							</button>
 						</div>

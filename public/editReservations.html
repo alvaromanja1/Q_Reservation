@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Welcome</title>
+	<title>Reservation</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
-	<link rel="icon" type="image/png" href="images/icons/faviconQR.png"/>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -37,9 +39,8 @@
     
     window.onload = function() {
       var a = getQueryVariable("username");
-      document.getElementById("test").innerHTML = a;
-      document.getElementById("test2").innerHTML = a;
-      document.getElementById("test3").innerHTML = a;
+      var reservationId = getQueryVariable("reservationId");
+        alert(reservationId);
       document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
     
     };
@@ -90,15 +91,22 @@
         var a = getQueryVariable("username");
         document.getElementById("navigationRA").setAttribute('href', 'rateApp.html?username=' + a);
     }
-    function navigateManageR(){
-        var reservationId = document.getElementById("reservationId").value;
+    function goiko(){
+        var restaurantName= document.getElementById("goiko").text;
         var a = getQueryVariable("username");
-        document.getElementById("navigationMReserv").setAttribute('href', 'editReservations.html?username=' + a +"&reservationId=" + reservationId);
+        document.getElementById("goiko").setAttribute('href', 'reservationEnd.html?username=' + a +"&restaurant=" + restaurantName);
     }
-    function navigateCP(){
+     function inout(){
+        var restaurantName= document.getElementById("inout").text;
         var a = getQueryVariable("username");
-        document.getElementById("navigationCP").setAttribute('href', 'changePassword.html?username=' + a);
+        document.getElementById("inout").setAttribute('href', 'reservationEnd.html?username=' + a +"&restaurant=" + restaurantName);
     }
+     function sublime(){
+        var restaurantName= document.getElementById("sublime").text;
+        var a = getQueryVariable("username");
+        document.getElementById("sublime").setAttribute('href', 'reservationEnd.html?username=' + a +"&restaurant=" + restaurantName);
+    }
+    
     
     
 </script>    
@@ -181,7 +189,7 @@
 			</li>
             
             <li class="t-center m-b-13">
-				<a onclick="navigateCP()" id="navigationCP" href="changePassword.html" class="txt19">Change Password</a>
+				<a href="logIn.html" class="txt19">Change Password</a>
 			</li>
 			<li class="t-center m-b-13">
 				<a href="index.html" class="txt19">Log out</a>
@@ -197,189 +205,55 @@
 		</div>
 	</aside>
 
-	<!-- Slide1 -->
-	<section class="section-slide">
-		<div class="wrap-slick1">
-			<div class="slick1">
-				<div class="item-slick1 item1-slick1" style="background-image: url(images/slideBurger.jpg);">
-					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-						<span class="caption1-slide1 txt1 t-center animated visible-false m-b-15" data-appear="fadeInDown">
-							Hi,
-						</span>
-                        <div class="caption2-slide1 tit1 t-center animated visible-false m-b-37" data-appear="fadeInUp" id="test">
-                        </div>
-                        
-						<div class="wrap-btn-slide1 animated visible-false" data-appear="zoomIn">
-							<!-- Button1 -->
-							<a onclick="navigateR3()" id="navigationR3" href="reservation.html" class="btn1 flex-c-m size1 txt3 trans-0-4">
-								Reservation
-							</a>
-						</div>
-					</div>
-				</div>
 
-				<div class="item-slick1 item2-slick1" style="background-image: url(images/slideMexican.jpg);">
-					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-						<span class="caption1-slide1 txt1 t-center animated visible-false m-b-15" data-appear="rollIn">
-							Hi,
-						</span>
-
-						<div class="caption2-slide1 tit1 t-center animated visible-false m-b-37" data-appear="fadeInUp" id="test2">
-                        </div>
-
-						<div class="wrap-btn-slide1 animated visible-false" data-appear="slideInUp">
-							<!-- Button1 -->
-							<a onclick="navigateR4()" id="navigationR4" href="reservation.html" class="btn1 flex-c-m size1 txt3 trans-0-4">
-								Reservation
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="item-slick1 item3-slick1" style="background-image: url(images/slideSushi.jpg);">
-					<div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150 p-b-170">
-						<span class="caption1-slide1 txt1 t-center animated visible-false m-b-15" data-appear="rotateInDownLeft">
-							Hi,
-						</span>
-
-						<div class="caption2-slide1 tit1 t-center animated visible-false m-b-37" data-appear="fadeInUp" id="test3">
-                        </div>
-
-						<div class="wrap-btn-slide1 animated visible-false" data-appear="rotateIn">
-							<!-- Button1 -->
-							<a onclick="navigateR5()" id="navigationR5" href="reservation.html" class="btn1 flex-c-m size1 txt3 trans-0-4">
-								Reservation
-							</a>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-			<div class="wrap-slick1-dots"></div>
-		</div>
+	<!-- Title Page -->
+	<section class="bg-title-page flex-c-m p-t-160 p-b-80 p-l-15 p-r-15" style="background-image: url(images/slideEditReservation.jpg);">
+		<h2 class="tit6 t-center">
+			Edit my Reservation
+		</h2>
 	</section>
 
-	<!-- Welcome -->
-	<section class="section-welcome bg1-pattern p-t-120 p-b-105">
+
+	<!-- Reservation -->
+	<section class="section-reservation bg1-pattern p-t-100 p-b-113">
 		<div class="container">
-			<div class="row">
-				<div class="col-md-6 p-t-45 p-b-30">
-					<div class="wrap-text-welcome t-center">
-						<span class="tit2 t-center">
-							Quick Reservation
-						</span>
-
-						<h3 class="tit3 t-center m-b-35 m-t-5">
-							Welcome
-						</h3>
-
-						<p class="t-center m-b-22 size3 m-l-r-auto">
-							As a user, you will be able to make reservations in the restaurants available on this app, see the menu`s, as well as rate application restaurant's.  
-						</p>
-					</div>
-				</div>
-
-				<div class="col-md-6 p-b-30">
-					<div class="wrap-pic-welcome size2 bo-rad-10 hov-img-zoom m-l-r-auto">
-						<img src="images/icons/logoQR.PNG" alt="IMG-OUR">
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<!-- Intro -->
-	<section class="section-intro">
-		<div class="header-intro parallax100 t-center p-t-135 p-b-158" style="background-image: url(images/slideReserved.jpg);">
-			<span class="tit2 p-l-15 p-r-15">
-				Manage
-			</span>
-
-			<h3 class="tit4 t-center p-l-15 p-r-15 p-t-3">
-				My Reservations
-			</h3>
-		</div>
-
-		<div class="content-intro bg-white p-t-77 p-b-133">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-4 p-t-30">
-						<!-- Block1 -->
-						<div class="blo1">
-							<div class="wrap-pic-blo1 bo-rad-10 hov-img-zoom">
-								<a href="#"><img src="images/slideRomantic.jpg" alt="IMG-INTRO"></a>
-							</div>
-
-							<div class="wrap-text-blo1 p-t-35">
-								<a href="#"><h4 class="txt5 color0-hov trans-0-4 m-b-13">
-									Romantic Restaurant
-								</h4></a>
-
-								<p class="m-b-20">
-									17/08/2018 - 15:00 - 4 persons
-								</p>
-
-								<a onclick="navigateManageR()" id="navigationMReserv" href="editReservations.html" class="txt4">
-									<!-- ocultarlo y pasarlo al hacer click -->
-                                    <textarea id="reservationId" style="visibility: hidden">52654125532214</textarea>
-                                    Manage it
-									<i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i>
+			
+						<!-- Item mainmenu -->
+						<div class="item-mainmenu m-b-36">
+							<div class="flex-w flex-b m-b-3">
+								<a class="name-item-mainmenu txt21">
+									ROMANTIC RESTAURANT
 								</a>
 							</div>
 						</div>
-					</div>
 
-					<div class="col-md-4 p-t-30">
-						<!-- Block1 -->
-						<div class="blo1">
-							<div class="wrap-pic-blo1 bo-rad-10 hov-img-zoom">
-								<a href="#"><img src="images/slideItalian.jpg" alt="IMG-INTRO"></a>
-							</div>
-
-							<div class="wrap-text-blo1 p-t-35">
-								<a href="#"><h4 class="txt5 color0-hov trans-0-4 m-b-13">
-									Italian Restaurant
-								</h4></a>
-
-								<p class="m-b-20">
-									25/12/2019 - 15:00 - 4 persons
-								</p>
-
-								<a href="#" class="txt4">
-									Manage it
-									<i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i>
+						<!-- Item mainmenu -->
+						<div class="item-mainmenu m-b-36">
+							<div class="flex-w flex-b m-b-3">
+								<a class="name-item-mainmenu txt21">
+									17/09/2018 15:00
 								</a>
 							</div>
 						</div>
-					</div>
 
-					<div class="col-md-4 p-t-30">
-						<!-- Block1 -->
-						<div class="blo1">
-							<div class="wrap-pic-blo1 bo-rad-10 hov-img-zoom">
-								<a href="#"><img src="images/slideMexicanoo.jpg" alt="IMG-INTRO"></a>
-							</div>
-
-							<div class="wrap-text-blo1 p-t-35">
-								<a href="#"><h4 class="txt5 color0-hov trans-0-4 m-b-13">
-									Mexican Restaurant
-								</h4></a>
-
-								<p class="m-b-20">
-									03/05/2018 - 15:00 - 4 persons
-								</p>
-
-								<a href="#" class="txt4">
-									Manage it
-									<i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i>
+						<!-- Item mainmenu -->
+						<div class="item-mainmenu m-b-36">
+							<div class="flex-w flex-b m-b-3">
+								<a class="name-item-mainmenu txt21">
+									4 people
 								</a>
-							</div>
 						</div>
 					</div>
-
-				</div>
-			</div>
+                    <div class="wrap-btn-booking flex-c-m m-t-13">
+                        <!-- Button3 -->
+                        <button type="submit" class="btn3 flex-c-m size36 txt11 trans-0-4">
+                            Modify it
+                        </button>
+                        <button type="submit" class="btn3 flex-c-m size36 txt11 trans-0-4">
+                            Delete it
+                        </button>
+				    </div>
+        
 		</div>
 	</section>
 
@@ -562,21 +436,6 @@
 
 	<!-- Container Selection1 -->
 	<div id="dropDownSelect1"></div>
-
-	<!-- Modal Video 01-->
-	<div class="modal fade" id="modal-video-01" tabindex="-1" role="dialog" aria-hidden="true">
-
-		<div class="modal-dialog" role="document" data-dismiss="modal">
-			<div class="close-mo-video-01 trans-0-4" data-dismiss="modal" aria-label="Close">&times;</div>
-
-			<div class="wrap-video-mo-01">
-				<div class="w-full wrap-pic-w op-0-0"><img src="images/icons/video-16-9.jpg" alt="IMG"></div>
-				<div class="video-mo-01">
-					<iframe src="https://www.youtube.com/embed/5k1hSu2gdKE?rel=0&amp;showinfo=0" allowfullscreen></iframe>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 

@@ -91,6 +91,14 @@
         var a = getQueryVariable("username");
         document.getElementById("navigationRA").setAttribute('href', 'rateApp.html?username=' + a);
     }
+    function navigateCP(){
+        var a = getQueryVariable("username");
+        document.getElementById("navigationCP").setAttribute('href', 'changePassword.html?username=' + a);
+    }
+    function navigateRR(){
+        var a = getQueryVariable("username");
+        document.getElementById("navigationRR").setAttribute('href', 'rateRestaurant.html?username=' + a);
+    }
     function goiko(){
         var restaurantName= document.getElementById("goiko").text;
         var a = getQueryVariable("username");
@@ -185,11 +193,11 @@
 			</li>
             
             <li class="t-center m-b-13">
-				<a href="blog.html" class="txt19">Rate a Restaurant</a>
+				<a onclick="navigateRR()" id="navigationRR" href="rateRestaurant.html" class="txt19">Rate a Restaurant</a>
 			</li>
             
             <li class="t-center m-b-13">
-				<a href="logIn.html" class="txt19">Change Password</a>
+				<a onclick="navigateCP()" id="navigationCP" href="changePassword.html" class="txt19">Change Password</a>
 			</li>
 			<li class="t-center m-b-13">
 				<a href="index.html" class="txt19">Log out</a>

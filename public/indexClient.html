@@ -99,6 +99,10 @@
         var a = getQueryVariable("username");
         document.getElementById("navigationCP").setAttribute('href', 'changePassword.html?username=' + a);
     }
+    function navigateRR(){
+        var a = getQueryVariable("username");
+        document.getElementById("navigationRR").setAttribute('href', 'rateRestaurant.html?username=' + a);
+    }
     
     
 </script>    
@@ -177,7 +181,7 @@
 			</li>
             
             <li class="t-center m-b-13">
-				<a href="blog.html" class="txt19">Rate a Restaurant</a>
+				<a onclick="navigateRR()" id="navigationRR" href="rateRestaurant.html" class="txt19">Rate a Restaurant</a>
 			</li>
             
             <li class="t-center m-b-13">

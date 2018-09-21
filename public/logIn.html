@@ -38,7 +38,11 @@
         function validateInfo(){
             var username = document.getElementById("usernameField").value;
             //window.location.href = "indexClient.html?username=" +username;
-            location.href = "indexClient.html?username=" +username;
+            if(document.getElementById("Admin").checked == true){
+                location.href = "indexAdmin.html?username=" +username;
+            }else{
+                location.href = "indexClient.html?username=" +username;
+            }
         }
         
     </script>
@@ -209,6 +213,7 @@
 								</div>
 							</div>
                         </div>
+                        <input id="Admin" type="radio" name="imgsel" value="Admin"/>
 
 						
 					</form>

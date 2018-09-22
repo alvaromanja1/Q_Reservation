@@ -80,20 +80,20 @@
     }
      function navigateM(){
         var a = getQueryVariable("username");
-        document.getElementById("navigationM").setAttribute('href', 'menu.html?username=' + a);
+        document.getElementById("navigationM").setAttribute('href', 'adminManageRestaurants.html?username=' + a);
     }
      function navigateMR(){
         var a = getQueryVariable("username");
-        document.getElementById("navigationMR").setAttribute('href', 'manageReservations.html?username=' + a);
+        document.getElementById("navigationMR").setAttribute('href', 'adminRestaurantList.html?username=' + a);
     }
      function navigateRA(){
         var a = getQueryVariable("username");
         document.getElementById("navigationRA").setAttribute('href', 'rateApp.html?username=' + a);
     }
     function navigateManageR(){
-        var reservationId = document.getElementById("reservationId").value;
+        var restaurantId = document.getElementById("restaurantId").value;
         var a = getQueryVariable("username");
-        document.getElementById("navigationMReserv").setAttribute('href', 'editReservations.html?username=' + a +"&reservationId=" + reservationId);
+        document.getElementById("navigationMReserv").setAttribute('href', 'editRestaurants.html?username=' + a +"&restaurantId=" + restaurantId);
     }
     function navigateCP(){
         var a = getQueryVariable("username");
@@ -101,7 +101,11 @@
     }
     function navigateRR(){
         var a = getQueryVariable("username");
-        document.getElementById("navigationRR").setAttribute('href', 'rateRestaurant.html?username=' + a);
+        document.getElementById("navigationRR").setAttribute('href', 'adminManageRestaurants.html?username=' + a);
+    }
+    function navigateRO(){
+        var a = getQueryVariable("username");
+        document.getElementById("navigationRO").setAttribute('href', 'adminRestaurantList.html?username=' + a);
     }
     function navigateRaR(){
         var a = getQueryVariable("username");
@@ -137,11 +141,11 @@
 								</li>
                                 
                                 <li>
-									<a onclick="navigateM()" id="navigationM" href="menu.html">Manage my Restaurant's</a>
+									<a onclick="navigateM()" id="navigationM" href="adminManageRestaurants.html">Manage my Restaurant's</a>
 								</li>
                                 
                                 <li>
-									<a onclick="navigateMR()" id="navigationMR" href="manageReservations.html">My restaurant's opinions</a>
+									<a onclick="navigateMR()" id="navigationMR" href="adminRestaurantList.html">My restaurant's opinions</a>
 								</li>
 								
 							</ul>
@@ -181,10 +185,10 @@
 			</li>
             
             <li class="t-center m-b-13">
-				<a onclick="navigateRR()" id="navigationRR" href="rateRestaurant.html" class="txt19">Manage my Restaurant's</a>
+				<a onclick="navigateRR()" id="navigationRR" href="adminManageRestaurants.html" class="txt19">Manage my Restaurant's</a>
 			</li>
              <li class="t-center m-b-13">
-				<a onclick="navigateRR()" id="navigationRR" href="rateRestaurant.html" class="txt19">My restaurant's opinions</a>
+				<a onclick="navigateRO()" id="navigationRR" href="adminRestaurantList.html" class="txt19">My restaurant's opinions</a>
 			</li>
             <li class="t-center m-b-13">
 				<a onclick="navigateCP()" id="navigationCP" href="changePassword.html" class="txt19">Change Password</a>
@@ -322,9 +326,9 @@
                                     Price: Expensive
 								</p>
 
-								<a onclick="navigateManageR()" id="navigationMReserv" href="editReservations.html" class="txt4">
+								<a onclick="navigateManageR()" id="navigationMReserv" href="editRestaurants.html" class="txt4">
 									<!-- ocultarlo y pasarlo al hacer click -->
-                                    <textarea id="reservationId" style="visibility: hidden">52654125532214</textarea>
+                                    <textarea id="restaurantId" style="visibility: hidden">52654125532214</textarea>
                                     Manage it
 									<i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i>
 								</a>

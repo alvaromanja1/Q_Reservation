@@ -77,11 +77,11 @@
     }
      function navigateM(){
         var a = getQueryVariable("username");
-        document.getElementById("navigationM").setAttribute('href', 'menu.html?username=' + a);
+        document.getElementById("navigationM").setAttribute('href', 'adminManageRestaurants.html?username=' + a);
     }
      function navigateMR(){
         var a = getQueryVariable("username");
-        document.getElementById("navigationMR").setAttribute('href', 'manageReservations.html?username=' + a);
+        document.getElementById("navigationMR").setAttribute('href', 'adminRestaurantList.html?username=' + a);
     }
      function navigateRA(){
         var a = getQueryVariable("username");
@@ -98,7 +98,15 @@
     }
     function navigateRR(){
         var a = getQueryVariable("username");
-        document.getElementById("navigationRR").setAttribute('href', 'rateRestaurant.html?username=' + a);
+        document.getElementById("navigationRR").setAttribute('href', 'adminManageRestaurants.html?username=' + a);
+    }
+    function navigateRO(){
+        var a = getQueryVariable("username");
+        document.getElementById("navigationRO").setAttribute('href', 'adminRestaurantList.html?username=' + a);
+    }
+    function generateRandom(){
+        var rand_NumeroAleatorio = Math.floor((999999999999999-4)*Math.random()) + 1;   
+        console.log(rand_NumeroAleatorio);
     }
     
     
@@ -130,11 +138,11 @@
 								</li>
                                 
                                 <li>
-									<a onclick="navigateM()" id="navigationM" href="menu.html">Manage my Restaurant's</a>
+									<a onclick="navigateM()" id="navigationM" href="adminManageRestaurants.html">Manage my Restaurant's</a>
 								</li>
                                 
                                 <li>
-									<a onclick="navigateMR()" id="navigationMR" href="manageReservations.html">My restaurant's opinions</a>
+									<a onclick="navigateMR()" id="navigationMR" href="adminRestaurantList.html">My restaurant's opinions</a>
 								</li>
 								
 							</ul>
@@ -174,10 +182,10 @@
 			</li>
             
             <li class="t-center m-b-13">
-				<a onclick="navigateRR()" id="navigationRR" href="rateRestaurant.html" class="txt19">Manage my Restaurant's</a>
+				<a onclick="navigateRR()" id="navigationRR" href="adminManageRestaurants.html" class="txt19">Manage my Restaurant's</a>
 			</li>
              <li class="t-center m-b-13">
-				<a onclick="navigateRR()" id="navigationRR" href="rateRestaurant.html" class="txt19">My restaurant's opinions</a>
+				<a onclick="navigateRO()" id="navigationRR" href="adminRestaurantList.html" class="txt19">My restaurant's opinions</a>
 			</li>
             <li class="t-center m-b-13">
 				<a onclick="navigateCP()" id="navigationCP" href="changePassword.html" class="txt19">Change Password</a>
@@ -288,7 +296,7 @@
 						<div class="wrap-btn-booking flex-c-m m-t-6">
 							<!-- Button3 -->
 							
-                            <button type="submit" class="btn3 flex-c-m size13 txt11 trans-0-4">
+                            <button type="submit" class="btn3 flex-c-m size13 txt11 trans-0-4" onclick="generateRandom()">
 								Submit
 							</button>
                             

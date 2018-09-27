@@ -4,6 +4,90 @@ var assert = require('assert');
 var nodemailer = require('nodemailer');
 var express = require("express");
 var app = express();
+
+var User = require('./usermodel');
+var Restaurant = require('./restaurantmodel');
+
+
+// Create and Save a new Note
+exports.create = (req, res) => {
+    
+    
+    // Validate request
+    if(req.body.name == "" && req.body.username == "" && req.body.email == "" && req.body.password == "") {
+        return res.status(400).send({
+            message: "User info content can not be empty"
+        });
+    }
+
+    // Create a Note
+    const user = new User({
+        name: req.body.name, 
+        username: req.body.username, 
+        email: req.body.email, 
+        password: req.body.password
+    });
+
+    // Save Note in the database
+    user.save()
+    .then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while creating the Note."
+        });
+    });
+};
+
+//Insertar restaurante
+exports.createRestaurant = (req, res) => {
+    // Validate request
+    if(req.body.name == "" && req.body.location == "" && req.body.maxpeople == "" && req.body.category == "" && req.body.price == "") {
+        return res.status(400).send({
+            message: "Restaurant info content can not be empty"
+        });
+    }
+
+    // Create a Note
+    const restaurant = new Restaurant({
+        name: req.body.name,
+        location: req.body.location,
+        maxPeople: req.body.maxpeople, 
+        category: req.body.category, 
+        price: req.body.price
+    });
+
+    // Save Note in the database
+    restaurant.save()
+    .then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while creating the Note."
+        });
+    });
+};
+
+// Retrieve and return all notes from the database.
+exports.findAll = (req, res) => {
+
+};
+
+// Find a single note with a noteId
+exports.findOne = (req, res) => {
+
+};
+
+// Update a note identified by the noteId in the request
+exports.update = (req, res) => {
+
+};
+
+// Delete a note with the specified noteId in the request
+exports.delete = (req, res) => {
+
+};
+
 /*
 var smtpTransport = nodemailer.createTransport({
     service: "gmail",

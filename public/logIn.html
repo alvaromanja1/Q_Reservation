@@ -35,15 +35,46 @@
 </head>
     <script>
         
-        function validateInfo(){
-            var username = document.getElementById("usernameField").value;
-            //window.location.href = "indexClient.html?username=" +username;
-            if(document.getElementById("Admin").checked == true){
-                location.href = "indexAdmin.html?username=" +username;
-            }else{
-                location.href = "indexClient.html?username=" +username;
-            }
+        
+        function log(){
+             var userName = $("#usernameField").val(); 
+             var passUser = $("#passField").val(); 
+            
+
+                     
+                                $.ajax({
+                                    url: "/login",
+                                    type: "POST",
+                                    data: { username: userName, password: passUser },
+                                    //contentType: "application/json",
+                                    complete: function() {
+                                     //called when complete
+                                    
+                                    console.log('process complete');
+                                    },
+                                    success: function(data, error, jqXHR) {
+                                     console.log('process sucess');
+                                     location.href ="indexClient.html?username="+userName;
+                                     var status = jqXHR.status;
+                                     console.log(status);
+                                        
+                                     },
+                                    error: function(error, jqXHR) {
+                                    alert("Incorrect info, please try again");
+                                    location.href ="logIn.html";
+                                    console.log('process error');
+                                    }
+                                });
         }
+        //function validateInfo(){
+            //var username = document.getElementById("usernameField").value;
+            //window.location.href = "indexClient.html?username=" +username;
+            //if(document.getElementById("Admin").checked == true){
+                //location.href = "indexAdmin.html?username=" +username;
+            //}else{
+                //location.href = "indexClient.html?username=" +username;
+            //}
+        //}
         
     </script>
 <body class="animsition">
@@ -209,17 +240,17 @@
 								</span>
 
 								<div class="wrap-inputphone size12 bo2 bo-rad-10 m-t-3 m-b-23">
-									<input class="bo-rad-10 sizefull txt10 p-l-20" type="password" placeholder="Password">
+									<input id="passField" class="bo-rad-10 sizefull txt10 p-l-20" type="password" placeholder="Password">
 								</div>
 							</div>
                         </div>
                         <input id="Admin" type="radio" name="imgsel" value="Admin"/>
-
-						
-					</form>
-                        <button type="submit" id="logB" class="btn3 flex-c-m size13 txt11 trans-0-4" onclick="validateInfo()" >
+                        
+						 <button type="submit" id="logB" class="btn3 flex-c-m size13 txt11 trans-0-4" onclick="log()">
 								Log In
 				        </button>
+					</form>
+                       
 				</div>
 			</div>
 

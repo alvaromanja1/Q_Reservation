@@ -14,7 +14,11 @@ module.exports = (app) => {
     // Create a new Note
     app.post('/user', user.create);
     
+    app.post('/login', user.login);
+    
     app.post('/restaurant', restaurant.createRestaurant);
+    
+    app.get('/restaurants', restaurant.getRestaurants);
 
     // Retrieve all Notes
     app.get('/users', user.findAll);

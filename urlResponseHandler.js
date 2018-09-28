@@ -39,6 +39,40 @@ exports.create = (req, res) => {
     });
 };
 
+//login
+exports.login = (req, res) => {
+     
+    var username = req.body.username; 
+    var password = req.body.password; 
+    
+    console.log(username);
+    console.log(password);
+    
+    User.findOne({"username": username, "password": password})
+    .then(user => {
+        if(!user) {
+            return res.status(404).send({
+                message: "Note not found with id "
+            });            
+        }
+        
+        res.statusCode = 201;
+        res.send(res.statusCode);
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Note not found with id "
+            });                
+        }
+        return res.status(500).send({
+            message: "Error retrieving note with id " 
+        });
+    });
+};
+
+
+
+
 //Insertar restaurante
 exports.createRestaurant = (req, res) => {
     // Validate request
@@ -64,6 +98,19 @@ exports.createRestaurant = (req, res) => {
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while creating the Note."
+        });
+    });
+};
+
+//get all restaurants from db
+exports.getRestaurants = (req, res) => {
+    
+    Restaurant.find()
+    .then(restaurant => {
+          res.send(restaurant);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving notes."
         });
     });
 };

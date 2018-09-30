@@ -7,6 +7,7 @@ var app = express();
 
 var User = require('./usermodel');
 var Restaurant = require('./restaurantmodel');
+var Reservation = require('./reservationmodel');
 
 
 // Create and Save a new Note
@@ -114,6 +115,57 @@ exports.getRestaurants = (req, res) => {
         });
     });
 };
+
+exports.createReservation = (req, res) => {
+    
+    if(req.body.username == "" && req.body.restaurant == "" && req.body.date == "" && req.body.time == "" && req.body.people == "" && req.body.name == "" && req.body.phone == "" && req.body.mail == "") {
+        return res.status(400).send({
+            message: "reservation info content can not be empty"
+        });
+    }
+    console.log(req.body.date);
+    console.log(req.body.restaurant);
+    console.log(req.body.time);
+
+    // Create a reservation
+    const reservation = new Reservation({
+        username: req.body.username, 
+        restaurant: req.body.restaurant, 
+        date: req.body.date, 
+        time: req.body.time, 
+        people: req.body.people, 
+        name: req.body.name, 
+        phone: req.body.phone, 
+        mail: req.body.mail
+    });
+
+    // Save reservation in the database
+    reservation.save()
+    
+    .then(data => {
+        res.statusCode = 201;
+        res.send(res.statusCode);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while creating the Note."
+        });
+    });
+};
+
+exports.getReservations = (req, res) => {
+    
+    var a = req.body.a;
+    
+    Reservation.find({"username": a})
+    .then(reservation => {
+        res.send(reservation);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
+};
+
 
 // Retrieve and return all notes from the database.
 exports.findAll = (req, res) => {

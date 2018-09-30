@@ -40,6 +40,8 @@
     window.onload = function() {
       var a = getQueryVariable("username");
       document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
+      var restaurantId = getQueryVariable("restaurantId"); 
+        
     
     };
     function getQueryVariable(variable)
@@ -97,14 +99,46 @@
         var a = getQueryVariable("username");
         document.getElementById("navigationRR").setAttribute('href', 'rateRestaurant.html?username=' + a);
     }
-    function rand_NumeroAleatorio(){
-        var rand_NumeroAleatorio = Math.floor((999999999999999-4)*Math.random()) + 1;   
-        console.log(rand_NumeroAleatorio);
-        //Insertar en la tabla de BD:
-        //1. NUMERO ALEATORIO QUE ES EL ID DE LA RESERVA.
-        //2. RESTAURANTE DE LA RESERVA.
-        //3. DIA, HORA, PERSONAS, NOMBRE DE LA PERSONA, TELEFONO Y EMAIL. 
-        //4. NOMBRE DE USUARIO DE LA PERSONA QUE HACE LA RESERVA. 
+    function bookRestaurant(){
+         var username = getQueryVariable("username");
+         var restaurant = getQueryVariable("restaurantId");
+         var date = document.getElementById("date").value;
+         var time = document.getElementById("time").value; 
+         var people = document.getElementById("people").value; 
+         var name = document.getElementById("name").value;
+         var phone = document.getElementById("phone").value; 
+         var mail = document.getElementById("mail").value;
+        
+        
+        
+        
+        
+        
+                                $.ajax({
+                                    url: "/reservation",
+                                    type: "POST",
+                                    data: { username: username, restaurant: restaurant, date: date, time: time, 
+                                          people: people, name: name, phone: phone, mail: mail},
+                                    //contentType: "application/json",
+                                    complete: function() {
+                                     //called when complete
+                                    console.log('process complete');
+                                    },
+                                    success: function(data, error, jqXHR) {
+                                     console.log('process sucess');
+                                     alert("Your reservation has been processed");
+                                     location.href ="indexClient.html?username=" + username;
+                                     var status = jqXHR.status;
+                                     //console.log(status);
+                                        
+                                     },
+                                    error: function(error, jqXHR) {
+                                    alert("Incorrect info, please try again");
+                                    //location.href ="index.html";
+                                    console.log('process error');
+                                    }
+                                });
+        
     }
     
     
@@ -237,7 +271,7 @@
 								</span>
 
 								<div class="wrap-inputdate pos-relative txt10 size12 bo2 bo-rad-10 m-t-3 m-b-23">
-									<input class="my-calendar bo-rad-10 sizefull txt10 p-l-20" type="text" name="date">
+									<input id="date" class="my-calendar bo-rad-10 sizefull txt10 p-l-20" type="text" name="date">
 									<i class="btn-calendar fa fa-calendar ab-r-m hov-pointer m-r-18" aria-hidden="true"></i>
 								</div>
 							</div>
@@ -250,15 +284,7 @@
 
 								<div class="wrap-inputtime size12 bo2 bo-rad-10 m-t-3 m-b-23">
 									<!-- Select2 -->
-									<select class="selection-1" name="time">
-										<option>9:00</option>
-										<option>9:30</option>
-										<option>10:00</option>
-										<option>10:30</option>
-										<option>11:00</option>
-										<option>11:30</option>
-										<option>12:00</option>
-										<option>12:30</option>
+									<select id="time" class="selection-1" name="time">
 										<option>13:00</option>
 										<option>13:30</option>
 										<option>14:00</option>
@@ -266,10 +292,14 @@
 										<option>15:00</option>
 										<option>15:30</option>
 										<option>16:00</option>
-										<option>16:30</option>
-										<option>17:00</option>
-										<option>17:30</option>
-										<option>18:00</option>
+										<option>20:30</option>
+										<option>21:00</option>
+										<option>21:30</option>
+										<option>22:00</option>
+										<option>22:30</option>
+										<option>23:00</option>
+										<option>23:30</option>
+										<option>24:00</option>
 									</select>
 								</div>
 							</div>
@@ -282,7 +312,7 @@
 
 								<div class="wrap-inputpeople size12 bo2 bo-rad-10 m-t-3 m-b-23">
 									<!-- Select2 -->
-									<select class="selection-1" name="people">
+									<select id="people" class="selection-1" name="people">
 										<option>1 person</option>
 										<option>2 people</option>
 										<option>3 people</option>
@@ -308,7 +338,7 @@
 								</span>
 
 								<div class="wrap-inputname size12 bo2 bo-rad-10 m-t-3 m-b-23">
-									<input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="name" placeholder="Name">
+									<input id="name" class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="name" placeholder="Name">
 								</div>
 							</div>
 
@@ -319,7 +349,7 @@
 								</span>
 
 								<div class="wrap-inputphone size12 bo2 bo-rad-10 m-t-3 m-b-23">
-									<input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="phone" placeholder="Phone">
+									<input id="phone" class="bo-rad-10 sizefull txt10 p-l-20" type="number" name="phone" placeholder="Phone">
 								</div>
 							</div>
 
@@ -330,7 +360,7 @@
 								</span>
 
 								<div class="wrap-inputemail size12 bo2 bo-rad-10 m-t-3 m-b-23">
-									<input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="email" placeholder="Email">
+									<input id="mail" class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="email" placeholder="Email">
 								</div>
 							</div>
 
@@ -338,7 +368,7 @@
 
 						<div class="wrap-btn-booking flex-c-m m-t-6">
 							<!-- Button3 -->
-							<button  onclick="rand_NumeroAleatorio()" type="submit" class="btn3 flex-c-m size13 txt11 trans-0-4">
+							<button  onclick="bookRestaurant()" type="submit" class="btn3 flex-c-m size13 txt11 trans-0-4">
 								Book Table
 							</button>
 						</div>

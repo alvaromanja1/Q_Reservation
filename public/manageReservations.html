@@ -38,6 +38,52 @@
     window.onload = function() {
       var a = getQueryVariable("username");
       document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
+        
+         $.ajax({
+                                    url: "/getReservations",
+                                    type: "POST",
+                                    data: { a: a },
+                                    //contentType: "application/json",
+                                    complete: function() {
+                                     //called when complete
+                                    console.log('process complete');
+                                    },
+                                    success: function(data, error, jqXHR) {
+                                     console.log(data);
+                                        var trHTML = '';
+                                        trHTML += 
+                                        '<tr><th>' + "" + 
+                                        '</th></tr>';  
+                                        
+                                        $.each(data, function (key,value) {
+                                            trHTML += 
+                                                '<td><img  class="wrap-pic-blo1 bo-rad-10 hov-img-zoom" src="images/slideItalian.jpg" alt="IMG-INTRO"></td>';  
+                                            
+                                            trHTML += 
+                                                '<tr class="class="m-b-20"">' + value.restaurant +'</tr>';  
+                                            
+                                            trHTML += 
+                                                '<td class="class="m-b-20"">' + value.date + " - " + value.time + " - "+ value.people +   '</td>'; 
+                                            trHTML += 
+                                                '<tr><td id="reservationId" hidden="true">' +value._id+'</td><td class="txt4">' +"MANAGE IT" +'<i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i></td></tr>'; 
+                                          });
+                                        $('#t01').append(trHTML);
+                                     //location.href ="indexCar.html";
+                                     //var status = jqXHR.status;
+                                     //console.log(status);
+                                        
+                                     },
+                                    error: function(error, jqXHR) {
+                                    //alert("Incorrect info, please try again");
+                                    //location.href ="index.html";
+                                    console.log('process error');
+                                    }
+                                });
+                     
+                    
+        
+                    
+        
     
     };
     function getQueryVariable(variable)
@@ -213,7 +259,12 @@
 		<div class="content-intro bg-white p-t-77 p-b-133">
 			<div class="container">
 				<div class="row">
+                    
+                    
 					<div class="col-md-4 p-t-30">
+                        
+                        
+                        
 						<!-- Block1 -->
 						<div class="blo1">
 							<div class="wrap-pic-blo1 bo-rad-10 hov-img-zoom">
@@ -286,7 +337,11 @@
 							</div>
 						</div>
 					</div>
-
+                        <table id="t01" border="0">
+                                <tr>
+                                        
+                                </tr>
+                        </table>
 				</div>
 			</div>
 		</div>

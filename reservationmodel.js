@@ -1,0 +1,16 @@
+var mongoose = require('mongoose');
+
+var ReservationSchema = mongoose.Schema({
+    username: String,
+    restaurant: String,
+    date: String,
+    time: String, 
+    people: String, 
+    name: String,
+    phone: Number, 
+    mail: String
+}, {
+    timestamps: true
+});
+
+module.exports = mongoose.model('Reservation', ReservationSchema);

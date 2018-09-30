@@ -61,11 +61,19 @@
             
                     $.each(data, function (key,value) {
                          trHTML += 
-                            '<tr><td id="tdPlate" class="name-item-mainmenu txt21">' + value.name + " (" + value.location + ")"+  
-                            '</td></tr>';     
+                            '<tr><th id="restaurantId" hidden="true">'+value._id + '</th><td id="tdPlate" class="name-item-mainmenu txt21">' + value.name + " (" + value.location + ")"+  '</td></tr>';     
                       });
                           
                         $('#t01').append(trHTML);
+            
+                        $('#t01').find('tr').click(function(){
+                            
+                            var clickedText = $(this).text();
+                            var restaurantId = clickedText.substr(0, 24);
+                            
+                            window.location.href = "reservationEnd.html?username=" + a + "&restaurantId=" + restaurantId;
+                           
+                        });
                     
         
                     });
@@ -254,23 +262,6 @@
 	<section class="section-reservation bg1-pattern p-t-100 p-b-113">
 		<div class="container">
 			
-						<!-- Item mainmenu -->
-						<div class="item-mainmenu m-b-36">
-							<div class="flex-w flex-b m-b-3">
-								<a onclick="goiko()" id="goiko" href="reservationEnd.html" class="name-item-mainmenu txt21">
-									GOIKO GRILL (BILBAO)
-								</a>
-							</div>
-						</div>
-
-						<!-- Item mainmenu -->
-						<div class="item-mainmenu m-b-36">
-							<div class="flex-w flex-b m-b-3">
-								<a onclick="inout()" id="inout" href="reservationEnd.html" class="name-item-mainmenu txt21">
-									IN & OUT (LEIOA)
-								</a>
-							</div>
-						</div>
 
 						<!-- Item mainmenu -->
 						<div class="item-mainmenu m-b-36">

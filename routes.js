@@ -10,6 +10,7 @@ var mongoose = require('mongoose');
 module.exports = (app) => {
     const user = require('./urlResponseHandler');
     const restaurant = require('./urlResponseHandler');
+    const reservation = require('./urlResponseHandler');
 
     // Create a new Note
     app.post('/user', user.create);
@@ -19,6 +20,10 @@ module.exports = (app) => {
     app.post('/restaurant', restaurant.createRestaurant);
     
     app.get('/restaurants', restaurant.getRestaurants);
+    
+    app.post('/reservation', reservation.createReservation);
+    
+    app.post('/getReservations', reservation.getReservations);
 
     // Retrieve all Notes
     app.get('/users', user.findAll);

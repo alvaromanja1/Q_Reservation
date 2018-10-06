@@ -49,25 +49,57 @@
                                     console.log('process complete');
                                     },
                                     success: function(data, error, jqXHR) {
-                                     console.log(data);
-                                        var trHTML = '';
-                                        trHTML += 
-                                        '<tr><th>' + "" + 
-                                        '</th></tr>';  
                                         
-                                        $.each(data, function (key,value) {
-                                            trHTML += 
-                                                '<td><img  class="wrap-pic-blo1 bo-rad-10 hov-img-zoom" src="images/slideItalian.jpg" alt="IMG-INTRO"></td>';  
+                                        function makeTr(data, attrName){
+                                            var html = '';
+                                             var i;
+
+                                            html += "<tr>";
                                             
-                                            trHTML += 
-                                                '<tr class="class="m-b-20"">' + value.restaurant +'</tr>';  
+                                            for (i = 0; i < data.length; ++i) {
+                                                html += '<td>' + data[i][attrName] + '</td>';
+                                            }
+                                            html += "</tr>";
+                                                return html;
+                                        }
+                                        
+                                        var html='';
+                                        var trHTML = '';
+                                        var i;
+    
+                                            html += "<table border='0px'>";
+                                        
+                                            for (i = 0; i < data.length; ++i) {
+                                                html += '<td><img  class="wrap-pic-blo1 bo-rad-10 hov-img-zoom" src="images/manageRest.jpg" alt="IMG-INTRO"></td>';
+                                               // html += '<td class="txt5 color0-hov trans-0-4 m-b-13"">' +data[i]["restaurant"]+'</td>';
+                                            }
+                                        
+                                            html += makeTr(data, "restaurant");
+                                            html += makeTr(data, "date");
+                                            html += makeTr(data, "time");
+                                            html += makeTr(data, "people");
+                                            //html += makeTr(data, "_id");
+                                            for (i = 0; i < data.length; ++i) {
+                                                
+                                                html += '<td class="txt4">'+data[i]._id +'</br></br>'+"manage it"+'<i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i></td>';
+                                            }
+
+                                            html += "</table>"
+
+                                            document.getElementById("reservationContent").innerHTML = html;
                                             
-                                            trHTML += 
-                                                '<td class="class="m-b-20"">' + value.date + " - " + value.time + " - "+ value.people +   '</td>'; 
-                                            trHTML += 
-                                                '<tr><td id="reservationId" hidden="true">' +value._id+'</td><td class="txt4">' +"MANAGE IT" +'<i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i></td></tr>'; 
-                                          });
-                                        $('#t01').append(trHTML);
+                                            $('#reservationContent').find('td').click(function(){
+                                            
+                                            var clickedText = $(this).text();
+                                            var reservationId = clickedText.substr(0, 24);
+                                            //alert(reservationId);
+
+                                            window.location.href = "editReservations.html?username=" + a +"&reservationId=" + reservationId;
+
+                                        });
+                                        
+                                        
+                                     
                                      //location.href ="indexCar.html";
                                      //var status = jqXHR.status;
                                      //console.log(status);
@@ -260,12 +292,11 @@
 			<div class="container">
 				<div class="row">
                     
-                    
+                    <!--
 					<div class="col-md-4 p-t-30">
                         
                         
                         
-						<!-- Block1 -->
 						<div class="blo1">
 							<div class="wrap-pic-blo1 bo-rad-10 hov-img-zoom">
 								<a href="#"><img src="images/slideRomantic.jpg" alt="IMG-INTRO"></a>
@@ -281,7 +312,7 @@
 								</p>
 
 								<a onclick="navigateManageR()" id="navigationMReserv" href="editReservations.html" class="txt4">
-									<!-- ocultarlo y pasarlo al hacer click -->
+									<!-- ocultarlo y pasarlo al hacer click 
                                     <textarea id="reservationId" style="visibility: hidden">52654125532214</textarea>
                                     Manage it
 									<i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i>
@@ -289,59 +320,18 @@
 							</div>
 						</div>
 					</div>
+                    -->
 
-					<div class="col-md-4 p-t-30">
-						<!-- Block1 -->
-						<div class="blo1">
-							<div class="wrap-pic-blo1 bo-rad-10 hov-img-zoom">
-								<a href="#"><img src="images/slideItalian.jpg" alt="IMG-INTRO"></a>
-							</div>
 
-							<div class="wrap-text-blo1 p-t-35">
-								<a href="#"><h4 class="txt5 color0-hov trans-0-4 m-b-13">
-									Italian Restaurant
-								</h4></a>
-
-								<p class="m-b-20">
-									25/12/2019 - 15:00 - 4 persons
-								</p>
-
-								<a class="txt4">
-									Manage it
-									<i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-4 p-t-30">
-						<!-- Block1 -->
-						<div class="blo1">
-							<div class="wrap-pic-blo1 bo-rad-10 hov-img-zoom">
-								<a href="#"><img src="images/slideMexicanoo.jpg" alt="IMG-INTRO"></a>
-							</div>
-
-							<div class="wrap-text-blo1 p-t-35">
-								<a href="#"><h4 class="txt5 color0-hov trans-0-4 m-b-13">
-									Mexican Restaurant
-								</h4></a>
-
-								<p class="m-b-20">
-									03/05/2018 - 15:00 - 4 persons
-								</p>
-
-								<a class="txt4">
-									Manage it
-									<i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-                        <table id="t01" border="0">
+                        
+                    <p id="reservationContent"></p>
+                    <!--
+                    <table id="t01" border="0">
                                 <tr>
                                         
                                 </tr>
                         </table>
+                    -->
 				</div>
 			</div>
 		</div>

@@ -166,6 +166,33 @@ exports.getReservations = (req, res) => {
     });
 };
 
+exports.getReservationInfo = (req, res) => {
+    
+    var reservationId = req.body.reservationId;
+    //console.log(reservationId);
+    Reservation.find({"_id": reservationId})
+    .then(reservation => {
+        console.log(reservation);
+        res.send(reservation);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
+};
+
+exports.deleteReservation = (req, res) => {
+    
+    var reservationId = req.body.reservationId;
+    Reservation.deleteOne({"_id": reservationId})
+    .then(reservation => {
+        res.send(reservation);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
+};
 
 // Retrieve and return all notes from the database.
 exports.findAll = (req, res) => {

@@ -24,6 +24,10 @@ module.exports = (app) => {
     app.post('/reservation', reservation.createReservation);
     
     app.post('/getReservations', reservation.getReservations);
+    
+    app.post('/getReservationInfo', reservation.getReservationInfo);
+    
+    app.post('/deleteReservation', reservation.deleteReservation);
 
     // Retrieve all Notes
     app.get('/users', user.findAll);

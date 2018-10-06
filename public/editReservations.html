@@ -41,6 +41,58 @@
       var a = getQueryVariable("username");
       var reservationId = getQueryVariable("reservationId");
       document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
+
+        $.ajax({
+                                    url: "/getReservationInfo",
+                                    type: "POST",
+                                    data: { reservationId: reservationId },
+                                    //contentType: "application/json",
+                                    complete: function() {
+                                     //called when complete
+                                    console.log('process complete');
+                                    },
+                                    success: function(data, error, jqXHR) {
+                                        console.log(data);
+                                       var trHTML = '';
+                                        trHTML += 
+                                                        '<tr><th>' + "" + 
+                                                        '</th><th>' + "" +
+                                                        '</th></tr>';  
+                                        //var json = JSON.stringify(data); 
+                                        //console.log(json);
+
+                                        $.each(data, function (key,value) {
+                                            
+                                             trHTML += 
+                                                '<tr><th id="restaurantId">'+"Restaurant Name: "+value.restaurant+ '</th></tr>';   
+                                             trHTML += 
+                                                '<tr><th  id="date">'+"Reservation Date: "+value.date+ '</th></tr>'; 
+                                            trHTML += 
+                                                '<tr><th  id="time">'+"Reservation Time: "+value.time+ '</th></tr>';   
+                                             trHTML += 
+                                                '<tr><th id="people">'+"People: "+value.people+ '</th></tr>'; 
+                                            trHTML += 
+                                                '<tr><th  id="name">'+"Name: "+value.name+ '</th></tr>';   
+                                            trHTML += 
+                                                '<tr><th  id="mail">'+"Email address: "+value.mail+ '</th></tr>'; 
+                                            trHTML += 
+                                                '<tr><th id="phone">'+"Phone number: "+value.phone+ '</th></tr>';
+                                                 
+                                            
+                                          });
+                                            
+                                            $('#t01').append(trHTML);
+
+                                            
+                    
+                                        
+                                     },
+                                    error: function(error, jqXHR) {
+                                    //alert("Incorrect info, please try again");
+                                    //location.href ="index.html";
+                                    console.log('process error');
+                                    }
+                                });
     
     };
     function getQueryVariable(variable)
@@ -98,21 +150,98 @@
         var a = getQueryVariable("username");
         document.getElementById("navigationRR").setAttribute('href', 'rateRestaurant.html?username=' + a);
     }
-    function goiko(){
-        var restaurantName= document.getElementById("goiko").text;
-        var a = getQueryVariable("username");
-        document.getElementById("goiko").setAttribute('href', 'reservationEnd.html?username=' + a +"&restaurant=" + restaurantName);
+    function modify(){
+        
+        
+      var a = getQueryVariable("username");
+      var reservationId = getQueryVariable("reservationId");
+        document.getElementById("restaurantId").style.display = "none";
+        document.getElementById("date").style.display = "none";
+        document.getElementById("time").style.display = "none";
+        document.getElementById("people").style.display = "none";
+        document.getElementById("name").style.display = "none";
+        document.getElementById("mail").style.display = "none";
+        document.getElementById("phone").style.display = "none";
+         $.ajax({
+                                    url: "/getReservationInfo",
+                                    type: "POST",
+                                    data: { reservationId: reservationId },
+                                    //contentType: "application/json",
+                                    complete: function() {
+                                     //called when complete
+                                    console.log('process complete');
+                                    },
+                                    success: function(data, error, jqXHR) {
+                                        console.log(data);
+                                       var trHTML = '';
+                                        trHTML += 
+                                                        '<tr><th>' + "" + 
+                                                        '</th><th>' + "" +
+                                                        '</th></tr>';  
+                                        //var json = JSON.stringify(data); 
+                                        //console.log(json);
+
+                                        $.each(data, function (key,value) {
+                                            
+                                             trHTML += 
+                                                '<tr><th>'+"Restaurant Name: "+'</th><th id="restaurantId2">'+value.restaurant+ '</th></tr>';   
+                                             trHTML += 
+                                                '<tr><th>'+"Reservation Date: "+'</th><th contenteditable="true" id="date2">'+value.date+ '</th></tr>'; 
+                                            trHTML += 
+                                                '<tr><th>'+"Reservation Time: "+'</th><th contenteditable="true" id="time2">'+value.time+ '</th></tr>';   
+                                             trHTML += 
+                                                '<tr><th>'+"People: "+'</th><th contenteditable="true" id="people2">'+value.people+ '</th></tr>'; 
+                                            trHTML += 
+                                                '<tr><th>'+"Name: "+'</th><th contenteditable="true" id="name2">'+value.name+ '</th></tr>';   
+                                            trHTML += 
+                                                '<tr><th>'+"Email address: "+'</th><th contenteditable="true" id="mail2">'+value.mail+ '</th></tr>'; 
+                                            trHTML += 
+                                                '<tr><th>'+"Phone number: "+'</th><th contenteditable="true" id="phone2">'+value.phone+ '</th></tr>';
+                                                 
+                                            
+                                          });
+                                            
+                                            $('#t01').append(trHTML);
+
+                                            
+                    
+                                        
+                                     },
+                                    error: function(error, jqXHR) {
+                                    //alert("Incorrect info, please try again");
+                                    //location.href ="index.html";
+                                    console.log('process error');
+                                    }
+                                });
+        
     }
-     function inout(){
-        var restaurantName= document.getElementById("inout").text;
+    function deleteReservation(){
         var a = getQueryVariable("username");
-        document.getElementById("inout").setAttribute('href', 'reservationEnd.html?username=' + a +"&restaurant=" + restaurantName);
+        var reservationId = getQueryVariable("reservationId");
+        $.ajax({
+                                    url: "/deleteReservation",
+                                    type: "POST",
+                                    data: { reservationId: reservationId },
+                                    //contentType: "application/json",
+                                    complete: function() {
+                                     //called when complete
+                                    console.log('process complete');
+                                    },
+                                    success: function(data, error, jqXHR) {
+                                    
+                                        alert("Congrats, your reservation has been deleted succesfully!");
+                                        window.location.href = "indexClient.html?username=" + a;
+                                        
+                                     },
+                                    error: function(error, jqXHR) {
+                                    //alert("Incorrect info, please try again");
+                                    //location.href ="index.html";
+                                        alert("An error has ocurred");
+                                    console.log('process error');
+                                    }
+                                });
     }
-     function sublime(){
-        var restaurantName= document.getElementById("sublime").text;
-        var a = getQueryVariable("username");
-        document.getElementById("sublime").setAttribute('href', 'reservationEnd.html?username=' + a +"&restaurant=" + restaurantName);
-    }
+   
     
     
     
@@ -225,38 +354,17 @@
 	<section class="section-reservation bg1-pattern p-t-100 p-b-113">
 		<div class="container">
 			
-						<!-- Item mainmenu -->
-						<div class="item-mainmenu m-b-36">
-							<div class="flex-w flex-b m-b-3">
-								<a class="name-item-mainmenu txt21">
-									ROMANTIC RESTAURANT
-								</a>
-							</div>
-						</div>
-
-						<!-- Item mainmenu -->
-						<div class="item-mainmenu m-b-36">
-							<div class="flex-w flex-b m-b-3">
-								<a class="name-item-mainmenu txt21">
-									17/09/2018 15:00
-								</a>
-							</div>
-						</div>
-
-						<!-- Item mainmenu -->
-						<div class="item-mainmenu m-b-36">
-							<div class="flex-w flex-b m-b-3">
-								<a class="name-item-mainmenu txt21">
-									4 people
-								</a>
-						</div>
-					</div>
+				    <table id="t01" border="0">
+                                <tr >
+                
+                                </tr>
+                    </table>
                     <div class="wrap-btn-booking flex-c-m m-t-13">
                         <!-- Button3 -->
-                        <button type="submit" class="btn3 flex-c-m size36 txt11 trans-0-4">
+                        <button type="submit" onclick="modify()" class="btn3 flex-c-m size36 txt11 trans-0-4">
                             Modify it
                         </button>
-                        <button type="submit" class="btn3 flex-c-m size36 txt11 trans-0-4">
+                        <button type="submit" onclick="deleteReservation()" class="btn3 flex-c-m size36 txt11 trans-0-4">
                             Delete it
                         </button>
 				    </div>

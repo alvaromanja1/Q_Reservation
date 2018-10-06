@@ -1744,3 +1744,6 @@ padding:10px;
 .ec-stars-wrapper > a:hover ~ a {
 	color: #888;
 }
+p#reservationContent{
+    overflow: scroll;
+}

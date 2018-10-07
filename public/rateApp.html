@@ -29,6 +29,9 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
 <!--===============================================================================================-->
 </head>
     
@@ -38,7 +41,6 @@
     window.onload = function() {
       var a = getQueryVariable("username");
       document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
-    
     };
     function getQueryVariable(variable)
     {
@@ -94,6 +96,30 @@
     function navigateRR(){
         var a = getQueryVariable("username");
         document.getElementById("navigationRR").setAttribute('href', 'rateRestaurant.html?username=' + a);
+    }
+    
+    
+    
+    function sendOpinion(){
+        var a = getQueryVariable("username");
+        var title = document.getElementById("title").value; 
+        var comment = document.getElementById("comment").value;
+        var x = document.getElementsByName("rating")[4].value;
+        alert(x);
+        
+        $( "#star5" ).click(function() {
+  alert( "Handler for .click() called." );
+});
+        
+        var rating1 = document.getElementById('star1').value;
+        var rating2 = document.getElementById('star2').value;
+        var rating3 = document.getElementById('star3').value;
+        var rating4 = document.getElementById('star4').value;
+        var rating5 = document.getElementById('star5').value;
+        
+    
+        
+        
     }
     
     
@@ -208,7 +234,7 @@
 				Rate us
 			</h3>
 
-			<form class="wrap-form-reservation size22 m-l-r-auto">
+			<div class="wrap-form-reservation size22 m-l-r-auto">
                 
 				<div class="row">
 					<div class="col-md-4">
@@ -218,7 +244,7 @@
 						</span>
 
 						<div class="wrap-inputname size12 bo2 bo-rad-10 m-t-3 m-b-23">
-							<input class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="name" placeholder="Title">
+							<input id="title" class="bo-rad-10 sizefull txt10 p-l-20" type="text" name="name" placeholder="Title">
 						</div>
 					</div>
 
@@ -227,32 +253,38 @@
 						<span class="txt9">
 							Comment
 						</span>
-						<textarea class="bo-rad-10 size35 bo2 txt10 p-l-20 p-t-15 m-b-10 m-t-3" name="message" placeholder="Write your comment"></textarea>
+						<textarea id="comment" class="bo-rad-10 size35 bo2 txt10 p-l-20 p-t-15 m-b-10 m-t-3" name="message" placeholder="Write your comment"></textarea>
 					</div>
 				</div>
-                
                 <div class="row">
                     <div class="col-md-4">
                     <span class="txt9">
 							Rating
 				    </span><br/>
-                    <div class="ec-stars-wrapper">
-                        <a href="#" data-value="1" title="Votar con 1 estrellas">&#9733;</a>
-                        <a href="#" data-value="2" title="Votar con 2 estrellas">&#9733;</a>
-                        <a href="#" data-value="3" title="Votar con 3 estrellas">&#9733;</a>
-                        <a href="#" data-value="4" title="Votar con 4 estrellas">&#9733;</a>
-                        <a href="#" data-value="5" title="Votar con 5 estrellas">&#9733;</a>
+                    <div id="rates" class="rating">
+                      <input type="radio" id="star5" name="rating" value="5" />
+                      <label for="star5">5 stars</label>
+                      <input type="radio" id="star4" name="rating" value="4" />
+                      <label for="star4">4 stars</label>
+                      <input type="radio" id="star3" name="rating" value="3" />
+                      <label for="star3">3 stars</label>
+                      <input type="radio" id="star2" name="rating" value="2" />
+                      <label for="star2">2 stars</label>
+                      <input type="radio" id="star1" name="rating" value="1" />
+                      <label for="star1">1 star</label>
                     </div>
-                    </div>
+
+                    
+                </div>
                 </div>
 
 				<div class="wrap-btn-booking flex-c-m m-t-13">
 					<!-- Button3 -->
-					<button type="submit" class="btn3 flex-c-m size36 txt11 trans-0-4">
+					<button type="submit" onclick="sendOpinion()" class="btn3 flex-c-m size36 txt11 trans-0-4">
 						Send
 					</button>
 				</div>
-			</form>
+			</div>
 
 
 				
@@ -460,6 +492,7 @@
 
 <!--===============================================================================================-->
 	<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <!--===============================================================================================-->
 	<script type="text/javascript" src="vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->

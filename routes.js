@@ -11,6 +11,7 @@ module.exports = (app) => {
     const user = require('./urlResponseHandler');
     const restaurant = require('./urlResponseHandler');
     const reservation = require('./urlResponseHandler');
+    const appOpinion = require('./urlResponseHandler');
 
     // Create a new Note
     app.post('/user', user.create);
@@ -28,6 +29,10 @@ module.exports = (app) => {
     app.post('/getReservationInfo', reservation.getReservationInfo);
     
     app.post('/deleteReservation', reservation.deleteReservation);
+    
+    app.post('/modifyReservation', reservation.modifyReservation);
+    
+    app.post('/rateApp', appOpinion.rateApp);
 
     // Retrieve all Notes
     app.get('/users', user.findAll);

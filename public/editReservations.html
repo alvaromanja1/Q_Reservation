@@ -41,6 +41,9 @@
       var a = getQueryVariable("username");
       var reservationId = getQueryVariable("reservationId");
       document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
+      document.getElementById("submitChanges").style.display = "none";
+      document.getElementById("modifyTitle").style.display = "none"; 
+     
 
         $.ajax({
                                     url: "/getReservationInfo",
@@ -64,19 +67,19 @@
                                         $.each(data, function (key,value) {
                                             
                                              trHTML += 
-                                                '<tr><th id="restaurantId">'+"Restaurant Name: "+value.restaurant+ '</th></tr>';   
+                                                '<tr><th id="restaurantId3">'+"Restaurant Name: "+'</th><th id="restaurantId">'+value.restaurant+ '</th></tr>';   
                                              trHTML += 
-                                                '<tr><th  id="date">'+"Reservation Date: "+value.date+ '</th></tr>'; 
+                                                '<tr><th id="date3">'+"Reservation Date: "+'</th><th  id="date">'+value.date+ '</th></tr>'; 
                                             trHTML += 
-                                                '<tr><th  id="time">'+"Reservation Time: "+value.time+ '</th></tr>';   
+                                                '<tr><th id="time3">'+"Reservation Time: "+'</th><th  id="time">'+value.time+ '</th></tr>';   
                                              trHTML += 
-                                                '<tr><th id="people">'+"People: "+value.people+ '</th></tr>'; 
+                                                '<tr><th id="people3">'+"People: "+'</th><th id="people">'+value.people+ '</th></tr>'; 
                                             trHTML += 
-                                                '<tr><th  id="name">'+"Name: "+value.name+ '</th></tr>';   
+                                                '<tr><th id="name3">'+"Name: "+'</th><th  id="name">'+value.name+ '</th></tr>';   
                                             trHTML += 
-                                                '<tr><th  id="mail">'+"Email address: "+value.mail+ '</th></tr>'; 
+                                                '<tr><th id="mail3">'+"Email address: "+'</th><th  id="mail">'+value.mail+ '</th></tr>'; 
                                             trHTML += 
-                                                '<tr><th id="phone">'+"Phone number: "+value.phone+ '</th></tr>';
+                                                '<tr><th id="phone3">'+"Phone number: "+'</th><th id="phone">'+value.phone+ '</th></tr>';
                                                  
                                             
                                           });
@@ -155,6 +158,8 @@
         
       var a = getQueryVariable("username");
       var reservationId = getQueryVariable("reservationId");
+        document.getElementById("submitChanges").style.display = "block";
+        document.getElementById("modifyTitle").style.display = "block"; 
         document.getElementById("restaurantId").style.display = "none";
         document.getElementById("date").style.display = "none";
         document.getElementById("time").style.display = "none";
@@ -162,6 +167,18 @@
         document.getElementById("name").style.display = "none";
         document.getElementById("mail").style.display = "none";
         document.getElementById("phone").style.display = "none";
+        document.getElementById("restaurantId3").style.display = "none";
+        document.getElementById("date3").style.display = "none";
+        document.getElementById("time3").style.display = "none";
+        document.getElementById("people3").style.display = "none";
+        document.getElementById("name3").style.display = "none";
+        document.getElementById("mail3").style.display = "none";
+        document.getElementById("phone3").style.display = "none";
+        
+        document.getElementById("modifyReservation").style.display = "none";
+        document.getElementById("deleteReservation").style.display = "none";
+       
+        
          $.ajax({
                                     url: "/getReservationInfo",
                                     type: "POST",
@@ -240,6 +257,42 @@
                                     console.log('process error');
                                     }
                                 });
+    }
+    
+    function submitChanges(){
+        var a = getQueryVariable("username");
+        var reservationId = getQueryVariable("reservationId");
+        var restaurant = document.getElementById("restaurantId2").innerText;
+        var date = document.getElementById("date2").innerText;
+        var time = document.getElementById("time2").innerText;
+        var people = document.getElementById("people2").innerText;
+        var name = document.getElementById("name2").innerText;
+        var mail = document.getElementById("mail2").innerText;
+        var phone = document.getElementById("phone2").innerText;
+        
+        $.ajax({
+                                    url: "/modifyReservation",
+                                    type: "POST",
+                                    data: { reservationId: reservationId, restaurant: restaurant, date: date, time: time, people: people, name: name, mail: mail, phone: phone },
+                                    //contentType: "application/json",
+                                    complete: function() {
+                                     //called when complete
+                                    console.log('process complete');
+                                    },
+                                    success: function(data, error, jqXHR) {
+                                    
+                                        alert("Congrats, your reservation has been modified succesfully!");
+                                        window.location.href = "indexClient.html?username=" + a;
+                                        
+                                     },
+                                    error: function(error, jqXHR) {
+                                    //alert("Incorrect info, please try again");
+                                    //location.href ="index.html";
+                                        alert("An error has ocurred");
+                                    console.log('process error');
+                                    }
+                                });
+       
     }
    
     
@@ -353,20 +406,24 @@
 	<!-- Reservation -->
 	<section class="section-reservation bg1-pattern p-t-100 p-b-113">
 		<div class="container">
-			
-				    <table id="t01" border="0">
-                                <tr >
+            <span id="modifyTitle" class="tit2">Modify the fields you want</span></br>
+				    <table id="t01" border="0" >
+                                <tr>
                 
                                 </tr>
                     </table>
                     <div class="wrap-btn-booking flex-c-m m-t-13">
                         <!-- Button3 -->
-                        <button type="submit" onclick="modify()" class="btn3 flex-c-m size36 txt11 trans-0-4">
+                        <button id="modifyReservation" type="submit" onclick="modify()" class="btn3 flex-c-m size36 txt11 trans-0-4">
                             Modify it
                         </button>
-                        <button type="submit" onclick="deleteReservation()" class="btn3 flex-c-m size36 txt11 trans-0-4">
+                        <button id="deleteReservation" type="submit" onclick="deleteReservation()" class="btn3 flex-c-m size36 txt11 trans-0-4">
                             Delete it
                         </button>
+                        <button id="submitChanges" type="submit" onclick="submitChanges()" class="btn3 flex-c-m size36 txt11 trans-0-4">
+                            Submit Changes
+                        </button>
+                        
 				    </div>
         
 		</div>

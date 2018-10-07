@@ -8,6 +8,7 @@ var app = express();
 var User = require('./usermodel');
 var Restaurant = require('./restaurantmodel');
 var Reservation = require('./reservationmodel');
+var AppRate = require('./qReservationOpinionmodel');
 
 
 // Create and Save a new Note
@@ -190,6 +191,60 @@ exports.deleteReservation = (req, res) => {
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
+};
+
+exports.modifyReservation = (req, res) => {
+    
+    var reservationId = req.body.reservationId;
+    var restaurant = req.body.restaurant;
+    var date = req.body.date;
+    var time = req.body.time;
+    var people = req.body.people;
+    var name = req.body.name;
+    var mail = req.body.mail;
+    var phone = req.body.phone;
+    
+    Reservation.updateOne({ "_id": reservationId}, { $set: { restaurant: restaurant, date: date, time: time, people: people, name: name, phone: phone, mail: mail }})
+    .then(reservation => {
+        console.log(reservation);
+        res.send(reservation);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
+    
+    
+    
+};
+
+exports.rateApp = (req, res) => {
+    
+    
+      // Validate request
+    if(req.body.title == "" && req.body.comment == "") {
+        return res.status(400).send({
+            message: "Error, info content can not be empty"
+        });
+    }
+
+    // Create a Note
+    const appOpinion = new AppRate({
+        username: req.body.name, 
+        title: req.body.username, 
+        comment: req.body.email, 
+        rating: req.body.password
+    });
+
+    // Save Note in the database
+    appOpinion.save()
+    .then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while creating the Note."
         });
     });
 };

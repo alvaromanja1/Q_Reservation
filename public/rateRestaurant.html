@@ -38,6 +38,42 @@
     window.onload = function() {
       var a = getQueryVariable("username");
       document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
+        
+        $.ajax({
+                     type: "GET",
+                     url: 'http://localhost:2000/restaurants',
+                     data: 'data',
+                     dataType: 'json',
+                     contentType: "application/json; charset=UTF-8"
+                    })
+        
+                    .done(function(data){ 
+                            var trHTML = '';
+                    trHTML += 
+                                    '<tr><th>' + "" + 
+                                    '</th><th>' + "" +
+                                    '</th></tr>';  
+                    //var json = JSON.stringify(data); 
+                    //console.log(json);
+            
+                    $.each(data, function (key,value) {
+                         trHTML += 
+                            '<tr><th id="restaurantId" hidden="true">'+value._id + '</th><td id="tdPlate" class="name-item-mainmenu txt21">' + value.name + " (" + value.location + ")"+  '</td></tr>';     
+                      });
+                          
+                        $('#t01').append(trHTML);
+            
+                        $('#t01').find('tr').click(function(){
+                            
+                            var clickedText = $(this).text();
+                            var restaurantId = clickedText.substr(0, 24);
+                            
+                            window.location.href = "rateRestaurantEnd.html?username=" + a + "&restaurantId=" + restaurantId;
+                           
+                        });
+                    
+        
+                    });    
     
     };
     function getQueryVariable(variable)
@@ -218,32 +254,11 @@
 	<section class="section-reservation bg1-pattern p-t-100 p-b-113">
 		<div class="container">
 			
-						<!-- Item mainmenu -->
-						<div class="item-mainmenu m-b-36">
-							<div class="flex-w flex-b m-b-3">
-								<a onclick="goiko()" id="goiko" href="rateRestaurantEnd.html" class="name-item-mainmenu txt21">
-									GOIKO GRILL (BILBAO)
-								</a>
-							</div>
-						</div>
-
-						<!-- Item mainmenu -->
-						<div class="item-mainmenu m-b-36">
-							<div class="flex-w flex-b m-b-3">
-								<a onclick="inout()" id="inout" href="rateRestaurantEnd.html" class="name-item-mainmenu txt21">
-									IN & OUT (LEIOA)
-								</a>
-							</div>
-						</div>
-
-						<!-- Item mainmenu -->
-						<div class="item-mainmenu m-b-36">
-							<div class="flex-w flex-b m-b-3">
-								<a onclick="sublime()" id="sublime" href="rateRestaurantEnd.html" class="name-item-mainmenu txt21">
-									SUBLIME DREAMS FOOD (MADRID)
-								</a>
-						</div>
-					</div>
+						<table id="t01" border="0">
+                                <tr >
+                
+                                </tr>
+                            </table>
         
 		</div>
         <link href="https://snatchbot.me/sdk/webchat.css" rel="stylesheet" type="text/css"><script src="https://snatchbot.me/sdk/webchat.min.js"></script><script> Init('?botID=30659&appID=', 600, 600, 'https://dvgpba5hywmpo.cloudfront.net/media/image/7NohU6vvEU3FEsgOcGmidZuUY', 'bubble', '#00AFF0', 90, 90, 62.99999999999999, '', '1', '#FFFFFF', ); /* for authentication of its users, you can define your userID (add &userID={login}) */ </script>

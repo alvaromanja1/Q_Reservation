@@ -221,8 +221,7 @@ exports.modifyReservation = (req, res) => {
 };
 
 exports.rateApp = (req, res) => {
-    
-    
+
       // Validate request
     if(req.body.title == "" && req.body.comment == "") {
         return res.status(400).send({
@@ -232,10 +231,10 @@ exports.rateApp = (req, res) => {
 
     // Create a Note
     const appOpinion = new AppRate({
-        username: req.body.name, 
-        title: req.body.username, 
-        comment: req.body.email, 
-        rating: req.body.password
+        username: req.body.a, 
+        title: req.body.title, 
+        comment: req.body.comment, 
+        rating: req.body.rating
     });
 
     // Save Note in the database
@@ -247,6 +246,11 @@ exports.rateApp = (req, res) => {
             message: err.message || "Some error occurred while creating the Note."
         });
     });
+};
+
+
+exports.rateRestaurant = (req, res) => {
+    //CREAR MODELO
 };
 
 // Retrieve and return all notes from the database.

@@ -102,6 +102,7 @@
     
     function sendOpinion(){
         var a = getQueryVariable("username");
+        var restaurantName = getQueryVariable("restaurantId");
         var title = document.getElementById("title").value; 
         var comment = document.getElementById("comment").value;
         var ratingValue;
@@ -122,7 +123,7 @@
          $.ajax({
                                     url: "/rateRestaurant",
                                     type: "POST",
-                                    data: { a: a, title: title, comment: comment, rating: ratingValue},
+                                    data: { a: a, restaurant: restaurantName, title: title, comment: comment, rating: ratingValue},
                                     //contentType: "application/json",
                                     complete: function() {
                                      //called when complete

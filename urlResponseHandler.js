@@ -9,6 +9,7 @@ var User = require('./usermodel');
 var Restaurant = require('./restaurantmodel');
 var Reservation = require('./reservationmodel');
 var AppRate = require('./qReservationOpinionmodel');
+var RestaurantRate = require('./restaurantOpinionmodel');
 
 
 // Create and Save a new Note
@@ -250,7 +251,58 @@ exports.rateApp = (req, res) => {
 
 
 exports.rateRestaurant = (req, res) => {
-    //CREAR MODELO
+    
+      if(req.body.title == "" && req.body.comment == "") {
+        return res.status(400).send({
+            message: "Error, info content can not be empty"
+        });
+    }
+
+    // Create a Note
+    const restaurantRate = new RestaurantRate({
+        username: req.body.a, 
+        restaurant: req.body.restaurant,
+        title: req.body.title, 
+        comment: req.body.comment, 
+        rating: req.body.rating
+    });
+
+    // Save Note in the database
+    restaurantRate.save()
+    .then(data => {
+        res.send(data);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while creating the Note."
+        });
+    });
+};
+
+exports.getNewestRestaurants = (req, res) => {
+    
+      Restaurant.aggregate([{ $sort : { updatedAt : -1 } }, { $limit : 3 }])
+    .then(restaurant => {
+        if(!restaurant) {
+            return res.status(404).send({
+                message: "Note not found with id "
+            });            
+        }
+        
+        res.statusCode = 201;
+        res.send(restaurant);
+          console.log(restaurant);
+    }).catch(err => {
+        if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+                message: "Note not found with id "
+            });                
+        }
+        return res.status(500).send({
+            message: "Error retrieving note with id " 
+        });
+    });
+    
+    
 };
 
 // Retrieve and return all notes from the database.

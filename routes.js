@@ -38,6 +38,8 @@ module.exports = (app) => {
     app.post('/rateRestaurant', restaurantOpinion.rateRestaurant);
     
     app.get('/getNewestRestaurants', restaurant.getNewestRestaurants);
+    
+    app.get('/getAppOpinion', appOpinion.getAppOpinion);
 
     // Retrieve all Notes
     app.get('/users', user.findAll);

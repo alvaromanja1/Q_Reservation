@@ -1747,6 +1747,12 @@ padding:10px;
 p#reservationContent{
     overflow: scroll;
 }
+p#restaurantContent{
+    overflow: scroll;
+}
+p#opinionContent{
+    overflow: scroll;
+}
 .rating {
   float: left;
   border: none;
@@ -1784,3 +1790,8 @@ p#reservationContent{
 .rating > label:hover ~ input:checked ~ label {
   color: #ea0;
 }
+
+.ratingSet1{
+    color: #f70;
+}
+

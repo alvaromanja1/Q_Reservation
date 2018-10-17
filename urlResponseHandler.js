@@ -125,14 +125,12 @@ exports.createReservation = (req, res) => {
             message: "reservation info content can not be empty"
         });
     }
-    console.log(req.body.date);
-    console.log(req.body.restaurant);
-    console.log(req.body.time);
 
     // Create a reservation
     const reservation = new Reservation({
         username: req.body.username, 
         restaurant: req.body.restaurant, 
+        restaurantName: req.body.restaurantName,
         date: req.body.date, 
         time: req.body.time, 
         people: req.body.people, 
@@ -256,10 +254,13 @@ exports.rateRestaurant = (req, res) => {
             message: "Error, info content can not be empty"
         });
     }
+    
+    console.log(req.body.restaurant);
 
     // Create a Note
     const restaurantRate = new RestaurantRate({
         username: req.body.a, 
+        restaurantId: req.body.restaurantId,
         restaurant: req.body.restaurant,
         title: req.body.title, 
         comment: req.body.comment, 
@@ -329,6 +330,25 @@ exports.getRestaurantName = (req, res) => {
     });
 };
 
+exports.updatePass = (req, res) => {
+    
+    var username = req.body.username; 
+    var oldPass = req.body.oldPass; 
+    var newPass = req.body.newPass;
+    
+    User.updateOne({ username: username, password:oldPass}, { $set: { password: newPass }})
+    .then(user => {
+        console.log(user);
+        res.send(user);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
+    
+    
+    
+};
 // Retrieve and return all notes from the database.
 exports.findAll = (req, res) => {
 

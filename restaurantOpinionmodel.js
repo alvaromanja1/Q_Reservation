@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var RestaurantRateSchema = mongoose.Schema({
     username: String,
+    restaurantId: String,
     restaurant: String,
     title: String,
     comment: String,

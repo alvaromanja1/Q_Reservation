@@ -42,6 +42,8 @@ module.exports = (app) => {
     app.get('/getAppOpinion', appOpinion.getAppOpinion);
     
     app.get('/getRestaurantName', restaurant.getRestaurantName);
+    
+    app.post('/updatePass', user.updatePass);
 
     // Retrieve all Notes
     app.get('/users', user.findAll);

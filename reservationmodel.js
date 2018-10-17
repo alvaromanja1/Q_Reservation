@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var ReservationSchema = mongoose.Schema({
     username: String,
     restaurant: String,
+    restaurantName: String,
     date: String,
     time: String, 
     people: String, 

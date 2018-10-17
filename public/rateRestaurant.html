@@ -67,8 +67,9 @@
                             
                             var clickedText = $(this).text();
                             var restaurantId = clickedText.substr(0, 24);
+                            var restaurant = clickedText.substr(24, clickedText.length);
                             
-                            window.location.href = "rateRestaurantEnd.html?username=" + a + "&restaurantId=" + restaurantId;
+                            window.location.href = "rateRestaurantEnd.html?username=" + a + "&restaurantId=" + restaurantId + "&restaurantName=" + restaurant;
                            
                         });
                     

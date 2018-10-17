@@ -38,8 +38,11 @@
     window.onload = function() {
       var a = getQueryVariable("username");
       var restaurantName = getQueryVariable("restaurantId");
+      var restaurant = getQueryVariable("restaurantName");
+      restaurant = decodeURIComponent((restaurant + '').replace(/\%20/g, '%20')); 
+        
       var result = decodeURI(restaurantName);
-      document.getElementById("restaurantName").innerHTML = "Rate " +result;
+      document.getElementById("restaurantName").innerHTML = "Rate " +restaurant;
       document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
     
     };
@@ -102,7 +105,9 @@
     
     function sendOpinion(){
         var a = getQueryVariable("username");
-        var restaurantName = getQueryVariable("restaurantId");
+        var restaurantId = getQueryVariable("restaurantId");
+        var restaurantName = getQueryVariable("restaurantName");
+        restaurantName = decodeURIComponent((restaurantName + '').replace(/\%20/g, '%20')); 
         var title = document.getElementById("title").value; 
         var comment = document.getElementById("comment").value;
         var ratingValue;
@@ -123,7 +128,7 @@
          $.ajax({
                                     url: "/rateRestaurant",
                                     type: "POST",
-                                    data: { a: a, restaurant: restaurantName, title: title, comment: comment, rating: ratingValue},
+                                    data: { a: a, restaurantId: restaurantId , restaurant: restaurantName, title: title, comment: comment, rating: ratingValue},
                                     //contentType: "application/json",
                                     complete: function() {
                                      //called when complete

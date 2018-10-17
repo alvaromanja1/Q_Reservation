@@ -69,9 +69,10 @@
                         $('#t01').find('tr').click(function(){
                             
                             var clickedText = $(this).text();
+                            var restaurant = clickedText.substr(24, clickedText.length);
                             var restaurantId = clickedText.substr(0, 24);
                             
-                            window.location.href = "reservationEnd.html?username=" + a + "&restaurantId=" + restaurantId;
+                            window.location.href = "reservationEnd.html?username=" + a + "&restaurantId=" + restaurantId + "&restaurantName=" + restaurant;
                            
                         });
                     

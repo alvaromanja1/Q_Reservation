@@ -41,6 +41,9 @@
       var a = getQueryVariable("username");
       document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
       var restaurantId = getQueryVariable("restaurantId"); 
+      var restaurant = getQueryVariable("restaurantName");
+      restaurant = decodeURIComponent((restaurant + '').replace(/\%20/g, '%20')); 
+        
         
     
     };
@@ -102,6 +105,8 @@
     function bookRestaurant(){
          var username = getQueryVariable("username");
          var restaurant = getQueryVariable("restaurantId");
+         var restaurantName = getQueryVariable("restaurantName");
+         restaurantName = decodeURIComponent((restaurantName + '').replace(/\%20/g, '%20')); 
          var date = document.getElementById("date").value;
          var time = document.getElementById("time").value; 
          var people = document.getElementById("people").value; 
@@ -117,7 +122,7 @@
                                 $.ajax({
                                     url: "/reservation",
                                     type: "POST",
-                                    data: { username: username, restaurant: restaurant, date: date, time: time, 
+                                    data: { username: username, restaurant: restaurant, restaurantName: restaurantName, date: date, time: time, 
                                           people: people, name: name, phone: phone, mail: mail},
                                     //contentType: "application/json",
                                     complete: function() {

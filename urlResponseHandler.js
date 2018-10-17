@@ -157,9 +157,8 @@ exports.createReservation = (req, res) => {
 exports.getReservations = (req, res) => {
     
     var a = req.body.a;
-    
     Reservation.find({"username": a})
-    .then(reservation => {
+    .then(reservation => {  
         res.send(reservation);
     }).catch(err => {
         res.status(500).send({
@@ -311,6 +310,18 @@ exports.getAppOpinion = (req, res) => {
     .then(rate => {
         console.log(rate);
         res.send(rate);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
+};
+
+exports.getRestaurantName = (req, res) => {
+    var a = req.body.restaurant;
+    Restaurant.find({"_id":  a})
+    .then(restaurant => {
+          res.send(restaurant);
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while retrieving notes."

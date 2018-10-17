@@ -95,14 +95,14 @@
         
                     .done(function(data){ 
                     console.log(data);
-                        function makeTr(data, attrName){
+                        function makeTr(data, attrName, viewAttribute){
                                             var html = '';
                                              var i;
 
                                             html += "<tr>";
                                             
                                             for (i = 0; i < data.length; ++i) {
-                                                html += '<td>' + data[i][attrName] + '</td>';
+                                                html += '<td>' + viewAttribute + data[i][attrName] + '</td>';
                                             }
                                             html += "</tr>";
                                                 return html;
@@ -119,30 +119,28 @@
                                                // html += '<td class="txt5 color0-hov trans-0-4 m-b-13"">' +data[i]["restaurant"]+'</td>';
                                             }
                                         
-                                            html += makeTr(data, "username");
-                                            html += makeTr(data, "title");
-                                            html += makeTr(data, "comment");
-                                            html += makeTr(data, "rating");
+                                            html += makeTr(data, "username", "");
+                                            html += makeTr(data, "title", "Title:   ");
+                                            html += makeTr(data, "comment", "Comment:   ");
                                             //html += makeTr(data, "_id");
                                             
                                             for (i = 0; i < data.length; ++i) {
-                                                html += '<td><div id="rates" class="rating"><input type="radio" id="star5" name="rating" value="5" /><label for="star5">5 stars</label><input type="radio" id="star4" name="rating" value="4" /><label for="star4">4 stars</label><input type="radio" id="star3" name="rating" value="3" /><label for="star3">3 stars</label><input type="radio" id="star2" name="rating" value="2" /><label for="star2">2 stars</label><input type="radio" id="star1" name="rating" value="1" /><label for="star1">1 star</label></div></td>';
+                                                
                                                 console.log(data[i].rating);
                                                 if(data[i].rating == 1){
                                                     
-                                                    
+                                                    html += '<td><span class="fa fa-star checked"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></span><span class="fa fa-star"></span><span class="fa fa-star"></span></td>';
                                                 }if(data[i].rating == 2){
-                                                    console.log(document.getElementById("star1"));
-                                                    //document.getElementById("star1").className = 'ratingSet1';
+                                                    html += '<td><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span></span><span class="fa fa-star"></span><span class="fa fa-star"></span></td>';
                                                     
                                                 }else if(data[i].rating == 3){
-                                                    
+                                                    html += '<td><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></span><span class="fa fa-star"></span><span class="fa fa-star"></span></td>';
                                                 }else if(data[i].rating == 4){
-                                                    
+                                                    html += '<td><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></span><span class="fa fa-star checked"></span><span class="fa fa-star"></span></td>';
                                                 }else if(data[i].rating == 5){
-                                                    
-                                                }else if (data[i].rating == 'undefined'){
-                                                    console.log("undefined");
+                                                html += '<td><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></span><span class="fa fa-star checked"></span><span class="fa fa-star checked"></span></td>';
+                                                }else if(data[i].rating == "undefined"){
+                                                    html += '<td><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></span><span class="fa fa-star"></span><span class="fa fa-star"></span></td>';
                                                 }
                                                 
                                                 
@@ -474,8 +472,8 @@
 				</div>
 			</div>
 
-			<div class="wrap-slick3-dots m-t-30"></div>
 		</div>
+        </div>
 	</section>
 
 	<!-- Footer -->

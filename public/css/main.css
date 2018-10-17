@@ -1795,3 +1795,8 @@ p#opinionContent{
     color: #f70;
 }
 
+.checked {
+    color: orange
+}
+
+

@@ -40,6 +40,8 @@ module.exports = (app) => {
     app.get('/getNewestRestaurants', restaurant.getNewestRestaurants);
     
     app.get('/getAppOpinion', appOpinion.getAppOpinion);
+    
+    app.get('/getRestaurantName', restaurant.getRestaurantName);
 
     // Retrieve all Notes
     app.get('/users', user.findAll);

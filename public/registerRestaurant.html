@@ -104,9 +104,38 @@
         var a = getQueryVariable("username");
         document.getElementById("navigationRO").setAttribute('href', 'adminRestaurantList.html?username=' + a);
     }
-    function generateRandom(){
-        var rand_NumeroAleatorio = Math.floor((999999999999999-4)*Math.random()) + 1;   
-        console.log(rand_NumeroAleatorio);
+    
+    function insertRestaurant(){
+        var username = getQueryVariable("username");
+        var name = $("#name").val();
+        var location = $("#location").val();
+        var maxpeople = $("#maxpeople").val();
+        var category = $("#category").val();
+        var price = $("#price").val();
+        
+          $.ajax({
+                                    url: "/restaurant",
+                                    type: "POST",
+                                    data: { username: username, name: name, location: location, maxpeople:maxpeople, category: category, price: price },
+                                    //contentType: "application/json",
+                                    complete: function() {
+                                     //called when complete
+                                    
+                                    console.log('process complete');
+                                        location.href ="indexAdmin.html?username="+username;
+                                    },
+                                    success: function(data, error, jqXHR) {
+                                     console.log('process sucess');
+                                     alert("Your restaurant has been introduced correctly");
+                                     location.href ="indexAdmin.html?username="+username;
+                                     },
+                                    error: function(error, jqXHR) {
+                                    alert("Incorrect info, please try again");
+                                    location.href ="registerRestaurant.html?username="+username;
+                                    console.log('process error');
+                                    }
+                                });
+        
     }
     
     
@@ -217,7 +246,6 @@
 						</span>
 					</div>
 
-					<form method="post" action="/restaurant" class="wrap-form-reservation size22 m-l-r-auto">
 						
                         <div class="wrap-btn-booking flex-c-m m-t-6">
 							<div class="col-md-5">
@@ -281,13 +309,21 @@
 							
 
 							<div class="col-md-5">
+                                
+                                
+
 								<!-- Phone -->
 								<span class="txt9">
 									Price
 								</span>
 
 								<div class="wrap-inputphone size12 bo2 bo-rad-10 m-t-3 m-b-23">
-									<input class="bo-rad-10 sizefull txt10 p-l-20" id="price" type="text" name="price" placeholder="Price">
+                                 <select class="bo-rad-10 sizefull txt10 p-l-20" id="price" name="price">
+                                   <option value="cheap">Cheap</option> 
+                                   <option value="medium">Medium</option> 
+                                   <option value="expensive">Expensive</option>
+                                </select>
+                                    
 								</div>
 							</div>
                         </div>
@@ -297,15 +333,14 @@
 						<div class="wrap-btn-booking flex-c-m m-t-6">
 							<!-- Button3 -->
 							
-                            <button type="submit" class="btn3 flex-c-m size13 txt11 trans-0-4" onclick="generateRandom()">
+                            <button type="submit" class="btn3 flex-c-m size13 txt11 trans-0-4" onclick="insertRestaurant()">
 								Submit
 							</button>
                             
-                            <button type="submit" class="btn3 flex-c-m size13 txt11 trans-0-4">
+                            <!--<button type="submit" onclick="insertRestaurant()" class="btn3 flex-c-m size13 txt11 trans-0-4">
 								Insert a menu
-							</button>
+							</button>-->
 						</div>
-					</form>
 				</div>
 			</div>
 

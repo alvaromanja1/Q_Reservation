@@ -38,6 +38,79 @@
     window.onload = function() {
       var a = getQueryVariable("username");
       document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
+        
+        $.ajax({
+                                    url: "/getUserRestaurants",
+                                    type: "POST",
+                                    data: { a: a },
+                                    //contentType: "application/json",
+                                    complete: function() {
+                                     //called when complete
+                                    console.log('process complete');
+                                    },
+                                    success: function(data, error, jqXHR) {
+                                        
+                                        function makeTr(data, attrName){
+                                            var html = '';
+                                             var i;
+
+                                            html += "<tr>";
+                                            
+                                            for (i = 0; i < data.length; ++i) {
+                                                html += '<td>' + data[i][attrName] + '</td>';
+                                            }
+                                            html += "</tr>";
+                                                return html;
+                                        }
+                                        
+                                        var html='';
+                                        var trHTML = '';
+                                        var i;
+    
+                                            html += "<table border='0px'>";
+                                        
+                                            for (i = 0; i < data.length; ++i) {
+                                                html += '<td><img  class="wrap-pic-blo1 bo-rad-10 hov-img-zoom" src="images/manageRest.jpg" alt="IMG-INTRO"></td>';
+                                               // html += '<td class="txt5 color0-hov trans-0-4 m-b-13"">' +data[i]["restaurant"]+'</td>';
+                                            }
+                                        
+                                            html += makeTr(data, "name");
+                                            html += makeTr(data, "location");
+                                            html += makeTr(data, "category");
+                                            //html += makeTr(data, "_id");
+                                            for (i = 0; i < data.length; ++i) {
+                                                
+                                                html += '<td class="txt4">'+data[i]._id +'</br></br>'+"manage it"+'<i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i></td>';
+                                            }
+
+                                            html += "</table>"
+
+                                            document.getElementById("reservationContent").innerHTML = html;
+                                            
+                                            $('#reservationContent').find('td').click(function(){
+                                            
+                                            var clickedText = $(this).text();
+                                            var reservationId = clickedText.substr(0, 24);
+                                            //alert(reservationId);
+
+                                            window.location.href = "editReservations.html?username=" + a +"&reservationId=" + reservationId;
+
+                                        });
+                                        
+                                        
+                                     
+                                     //location.href ="indexCar.html";
+                                     //var status = jqXHR.status;
+                                     //console.log(status);
+                                        
+                                     },
+                                    error: function(error, jqXHR) {
+                                    //alert("Incorrect info, please try again");
+                                    //location.href ="index.html";
+                                    console.log('process error');
+                                    }
+                                });
+                     
     
     };
     function getQueryVariable(variable)
@@ -81,7 +154,7 @@
     }
      function navigateMR(){
         var a = getQueryVariable("username");
-        document.getElementById("navigationMR").setAttribute('href', 'manageReservations.html?username=' + a);
+        document.getElementById("navigationMR").setAttribute('href', 'adminRestaurantList.html?username=' + a);
     }
      function navigateRA(){
         var a = getQueryVariable("username");
@@ -98,7 +171,7 @@
     }
     function navigateRR(){
         var a = getQueryVariable("username");
-        document.getElementById("navigationRR").setAttribute('href', 'rateRestaurant.html?username=' + a);
+        document.getElementById("navigationRR").setAttribute('href', 'adminRestaurantList.html?username=' + a);
     }
     function navigateRaR(){
         var a = getQueryVariable("username");
@@ -208,88 +281,8 @@
 		<div class="content-intro bg-white p-t-77 p-b-133">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-4 p-t-30">
-						<!-- Block1 -->
-						<div class="blo1">
-							<div class="wrap-pic-blo1 bo-rad-10 hov-img-zoom">
-								<a href="#"><img src="images/slideRomantic.jpg" alt="IMG-INTRO"></a>
-							</div>
-
-							<div class="wrap-text-blo1 p-t-35">
-								<a href="#"><h4 class="txt5 color0-hov trans-0-4 m-b-13">
-									Romantic Restaurant
-								</h4></a>
-
-								<p class="m-b-20">
-									Cathegory: Pasta
-                                    Max people: 50
-                                    Location: Bilbao
-                                    Price: Expensive
-								</p>
-
-								<a onclick="navigateManageR()" id="navigationMReserv" href="editReservations.html" class="txt4">
-									<!-- ocultarlo y pasarlo al hacer click -->
-                                    <textarea id="restaurantId" style="visibility: hidden">52654125532214</textarea>
-                                    Manage it
-									<i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-4 p-t-30">
-						<!-- Block1 -->
-						<div class="blo1">
-							<div class="wrap-pic-blo1 bo-rad-10 hov-img-zoom">
-								<a href="#"><img src="images/slideItalian.jpg" alt="IMG-INTRO"></a>
-							</div>
-
-							<div class="wrap-text-blo1 p-t-35">
-								<a href="#"><h4 class="txt5 color0-hov trans-0-4 m-b-13">
-									Italian Restaurant
-								</h4></a>
-
-								<p class="m-b-20">
-									Cathegory: Pasta
-                                    Max people: 50
-                                    Location: Bilbao
-                                    Price: Expensive
-								</p>
-
-								<a class="txt4">
-									Manage it
-									<i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-4 p-t-30">
-						<!-- Block1 -->
-						<div class="blo1">
-							<div class="wrap-pic-blo1 bo-rad-10 hov-img-zoom">
-								<a href="#"><img src="images/slideMexicanoo.jpg" alt="IMG-INTRO"></a>
-							</div>
-
-							<div class="wrap-text-blo1 p-t-35">
-								<a href="#"><h4 class="txt5 color0-hov trans-0-4 m-b-13">
-									Mexican Restaurant
-								</h4></a>
-
-								<p class="m-b-20">
-									Cathegory: Pasta
-                                    Max people: 50
-                                    Location: Bilbao
-                                    Price: Expensive
-								</p>
-
-								<a class="txt4">
-									Manage it
-									<i class="fa fa-long-arrow-right m-l-10" aria-hidden="true"></i>
-								</a>
-							</div>
-						</div>
-					</div>
+					
+                    <p id="reservationContent"></p>
 
 				</div>
 			</div>

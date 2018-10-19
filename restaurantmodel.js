@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var RestaurantSchema = mongoose.Schema({
+    username: String,
     name: String,
     location: String,
     maxPeople: Number,

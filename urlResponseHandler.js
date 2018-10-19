@@ -87,6 +87,7 @@ exports.createRestaurant = (req, res) => {
 
     // Create a Note
     const restaurant = new Restaurant({
+        username: req.body.username,
         name: req.body.name,
         location: req.body.location,
         maxPeople: req.body.maxpeople, 
@@ -346,8 +347,44 @@ exports.updatePass = (req, res) => {
         });
     });
     
-    
-    
+};
+
+exports.getUserRestaurants = (req, res) => {
+    var a = req.body.a;
+    Restaurant.find({"username": a})
+    .then(restaurant => {  
+        res.send(restaurant);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
+};
+
+exports.getAdminRestaurantList = (req, res) => {
+     var a = req.body.a;
+    Restaurant.find({"username":  a})
+    .then(restaurant => {
+          res.send(restaurant);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
+};
+
+exports.getAdminRestaurantOpinions = (req, res) => {
+    var restaurantId = req.body.restaurantId;
+    console.log(restaurantId);
+    RestaurantRate.find({"restaurantId":  restaurantId})
+    .then(rate => {
+        res.send(rate);
+        console.log(rate);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
 };
 // Retrieve and return all notes from the database.
 exports.findAll = (req, res) => {

@@ -38,8 +38,51 @@
     window.onload = function() {
       var a = getQueryVariable("username");
       document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
+        
+        
+        $.ajax({
+                                    url: "/getAdminRestaurantList",
+                                    type: "POST",
+                                    data: { a: a },
+                                    //contentType: "application/json",
+                                    complete: function() {
+                                     //called when complete
+                                    console.log('process complete');
+                                    },
+                                    success: function(data, error, jqXHR) {
+                                        var trHTML = '';
+                                        trHTML += 
+                                                        '<tr><th>' + "" + 
+                                                        '</th><th>' + "" +
+                                                        '</th></tr>';  
+                                        //var json = JSON.stringify(data); 
+                                        //console.log(json);
+
+                                        $.each(data, function (key,value) {
+                                             trHTML += 
+                                                '<tr><th id="restaurantId" hidden="true">'+value._id + '</th><td id="tdPlate" class="name-item-mainmenu txt21">' + value.name + " (" + value.location + ")"+  '</td></tr>';     
+                                          });
+
+                                            $('#t01').append(trHTML);
+
+                                            $('#t01').find('tr').click(function(){
+
+                                                var clickedText = $(this).text();
+                                                var restaurant = clickedText.substr(24, clickedText.length);
+                                                var restaurantId = clickedText.substr(0, 24);
+
+                                                window.location.href = "adminRestaurantOpinionsEnd.html?username=" + a + "&restaurantId=" + restaurantId + "&restaurantName=" + restaurant;
+
+                                            });
+
+
+                                    }
+        });
+                                
     
-    };
+                                
+    
+    
     function getQueryVariable(variable)
     {
        var query = window.location.search.substring(1);
@@ -109,23 +152,9 @@
         document.getElementById("navigationRaR").setAttribute('href', 'registerRestaurant.html?username=' + a);
     }
     
-    function goiko(){
-        var restaurantName= document.getElementById("goiko").text;
-        var a = getQueryVariable("username");
-        document.getElementById("goiko").setAttribute('href', 'adminRestaurantOpinionsEnd.html?username=' + a +"&restaurant=" + restaurantName);
-    }
-     function inout(){
-        var restaurantName= document.getElementById("inout").text;
-        var a = getQueryVariable("username");
-        document.getElementById("inout").setAttribute('href', 'adminRestaurantOpinionsEnd.html?username=' + a +"&restaurant=" + restaurantName);
-    }
-     function sublime(){
-        var restaurantName= document.getElementById("sublime").text;
-        var a = getQueryVariable("username");
-        document.getElementById("sublime").setAttribute('href', 'adminRestaurantOpinionsEnd.html?username=' + a +"&restaurant=" + restaurantName);
-    }
+
     
-    
+    };
 </script>    
 <body class="animsition">
 
@@ -225,29 +254,13 @@
 			
 						<!-- Item mainmenu -->
 						<div class="item-mainmenu m-b-36">
-							<div class="flex-w flex-b m-b-3">
-								<a onclick="goiko()" id="goiko" href="adminRestaurantOpinionsEnd.html" class="name-item-mainmenu txt21">
-									GOIKO GRILL (BILBAO)
-								</a>
-							</div>
-						</div>
-
-						<!-- Item mainmenu -->
-						<div class="item-mainmenu m-b-36">
-							<div class="flex-w flex-b m-b-3">
-								<a onclick="inout()" id="inout" href="adminRestaurantOpinionsEnd.html" class="name-item-mainmenu txt21">
-									IN & OUT (LEIOA)
-								</a>
-							</div>
-						</div>
-
-						<!-- Item mainmenu -->
-						<div class="item-mainmenu m-b-36">
-							<div class="flex-w flex-b m-b-3">
-								<a onclick="sublime()" id="sublime" href="adminRestaurantOpinionsEnd.html" class="name-item-mainmenu txt21">
-									SUBLIME DREAMS FOOD (MADRID)
-								</a>
-						</div>
+							
+                            
+                            <table id="t01" border="0">
+                                <tr >
+                
+                                </tr>
+                            </table>
 					</div>
         
 		</div>

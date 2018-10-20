@@ -28,7 +28,8 @@ exports.create = (req, res) => {
         name: req.body.name, 
         username: req.body.username, 
         email: req.body.email, 
-        password: req.body.password
+        password: req.body.password, 
+        hasRestaurant: req.body.hasRestaurant
     });
 
     // Save Note in the database
@@ -60,7 +61,7 @@ exports.login = (req, res) => {
         }
         
         res.statusCode = 201;
-        res.send(res.statusCode);
+        res.send(user);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({

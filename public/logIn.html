@@ -53,10 +53,17 @@
                                     console.log('process complete');
                                     },
                                     success: function(data, error, jqXHR) {
-                                     console.log('process sucess');
-                                     location.href ="indexClient.html?username="+userName;
-                                     var status = jqXHR.status;
-                                     console.log(status);
+                                        
+                                       
+                                        if(data.hasRestaurant == true){
+                                            location.href ="indexAdmin.html?username="+userName;
+                                        }else if(data.hasRestaurant == false){
+                                            location.href ="indexClient.html?username="+userName;
+                                        }
+                                        
+                                     //location.href ="indexClient.html?username="+userName;
+                                     //var status = jqXHR.status;
+                                     //console.log(status);
                                         
                                      },
                                     error: function(error, jqXHR) {
@@ -214,7 +221,6 @@
 						</span>
 					</div>
 
-					<form class="wrap-form-reservation size22 m-l-r-auto">
 						<div class="wrap-btn-booking flex-c-m m-t-6">
 							<div class="col-md-5">
 								<!-- Name -->
@@ -244,12 +250,9 @@
 								</div>
 							</div>
                         </div>
-                        <input id="Admin" type="radio" name="imgsel" value="Admin"/>
-                        
 						 <button type="submit" id="logB" class="btn3 flex-c-m size13 txt11 trans-0-4" onclick="log()">
 								Log In
 				        </button>
-					</form>
                        
 				</div>
 			</div>

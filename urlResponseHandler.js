@@ -140,7 +140,8 @@ exports.createReservation = (req, res) => {
         people: req.body.people, 
         name: req.body.name, 
         phone: req.body.phone, 
-        mail: req.body.mail
+        mail: req.body.mail, 
+        image: req.body.image
     });
 
     // Save reservation in the database
@@ -261,7 +262,7 @@ exports.rateRestaurant = (req, res) => {
     }
     
     console.log(req.body.restaurant);
-
+console.log(req.body.image);
     // Create a Note
     const restaurantRate = new RestaurantRate({
         username: req.body.a, 
@@ -269,9 +270,10 @@ exports.rateRestaurant = (req, res) => {
         restaurant: req.body.restaurant,
         title: req.body.title, 
         comment: req.body.comment, 
-        rating: req.body.rating
+        rating: req.body.rating, 
+        image: req.body.image
     });
-
+    
     // Save Note in the database
     restaurantRate.save()
     .then(data => {
@@ -396,6 +398,19 @@ exports.getUserInfo = (req, res) => {
     User.find({"username":  user})
     .then(user => {
           res.send(user);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
+};
+
+exports.getRestaurantImage = (req, res) => {
+     var restaurant = req.body.restaurant;
+    
+    Restaurant.find({"_id": restaurant})
+    .then(restaurant => {  
+        res.send(restaurant);
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while retrieving notes."

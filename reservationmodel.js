@@ -9,7 +9,8 @@ var ReservationSchema = mongoose.Schema({
     people: String, 
     name: String,
     phone: Number, 
-    mail: String
+    mail: String, 
+    image: String
 }, {
     timestamps: true
 });

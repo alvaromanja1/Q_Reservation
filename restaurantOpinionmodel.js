@@ -6,7 +6,8 @@ var RestaurantRateSchema = mongoose.Schema({
     restaurant: String,
     title: String,
     comment: String,
-    rating: Number
+    rating: Number, 
+    image: String
 }, {
     timestamps: true
 });

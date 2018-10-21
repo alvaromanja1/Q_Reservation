@@ -45,14 +45,14 @@
         
                     .done(function(data){ 
                     console.log(data);
-                        function makeTr(data, attrName){
+                        function makeTr(data, attrName, attrValue){
                                             var html = '';
                                              var i;
 
                                             html += "<tr>";
                                             
                                             for (i = 0; i < data.length; ++i) {
-                                                html += '<td>' + data[i][attrName] + '</td>';
+                                                html += '<td>' +attrValue + data[i][attrName] + '</td>';
                                             }
                                             html += "</tr>";
                                                 return html;
@@ -65,14 +65,15 @@
                                             html += "<table border='0px'>";
                                         
                                             for (i = 0; i < data.length; ++i) {
-                                                html += '<td><img  class="wrap-pic-blo1 bo-rad-10 hov-img-zoom" src="images/manageRest.jpg" alt="IMG-INTRO"></td>';
+                                                image = data[i].image;
+                                                html += '<td><img id="imgRest" src='+image+'></td>';
                                                // html += '<td class="txt5 color0-hov trans-0-4 m-b-13"">' +data[i]["restaurant"]+'</td>';
                                             }
                                         
-                                            html += makeTr(data, "name");
-                                            html += makeTr(data, "location");
-                                            html += makeTr(data, "category");
-                                            html += makeTr(data, "price");
+                                            html += makeTr(data, "name", "Name: ");
+                                            html += makeTr(data, "location", "Location: ");
+                                            html += makeTr(data, "category", "Category: ");
+                                            html += makeTr(data, "price", "Price: ");
                                             //html += makeTr(data, "_id");
                                             
 

@@ -36,7 +36,7 @@
     
 <script>
     
-    
+    var restaurantImage;
     window.onload = function() {
       var a = getQueryVariable("username");
       document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
@@ -44,7 +44,28 @@
       var restaurant = getQueryVariable("restaurantName");
       restaurant = decodeURIComponent((restaurant + '').replace(/\%20/g, '%20')); 
         
-         $.ajax({
+        $.ajax({
+                                    url: "/getRestaurantImage",
+                                    type: "POST",
+                                    data: { restaurant: restaurantId },
+                                    //contentType: "application/json",
+                                    complete: function() {
+                                     //called when complete
+                                    console.log('process complete');
+                                    },
+                                    success: function(data, error, jqXHR) {
+                                      restaurantImage =  data[0].image;
+
+                                        
+                                     },
+                                    error: function(error, jqXHR) {
+                                    //alert("Incorrect info, please try again");
+                                    //location.href ="index.html";
+                                    console.log('process error');
+                                    }
+                                }); 
+        
+        $.ajax({
                                     url: "/getUserInfo",
                                     type: "POST",
                                     data: { a: a },
@@ -148,7 +169,7 @@
                                     url: "/reservation",
                                     type: "POST",
                                     data: { username: username, restaurant: restaurant, restaurantName: restaurantName, date: date, time: time, 
-                                          people: people, name: name, phone: phone, mail: mail},
+                                          people: people, name: name, phone: phone, mail: mail, image: restaurantImage},
                                     //contentType: "application/json",
                                     complete: function() {
                                      //called when complete

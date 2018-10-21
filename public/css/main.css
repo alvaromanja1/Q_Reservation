@@ -1802,3 +1802,7 @@ p#opinionContent{
     max-width:50px;
     max-height:100px;
 }
+#imgRest{
+    max-width:250px;
+    max-height:200px;
+}

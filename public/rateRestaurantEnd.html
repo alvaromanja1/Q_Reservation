@@ -34,7 +34,7 @@
     
 <script>
     
-    
+    var profileImage;
     window.onload = function() {
       var a = getQueryVariable("username");
       var restaurantName = getQueryVariable("restaurantId");
@@ -55,7 +55,7 @@
                                     console.log('process complete');
                                     },
                                     success: function(data, error, jqXHR) {
-                                       var profileImage = data[0].image;
+                                       profileImage = data[0].image;
                                         
                                         document.getElementById('img')
                                         .setAttribute(
@@ -150,11 +150,10 @@
        }else if (document.getElementById('star1').checked){
         ratingValue = 1;
        }
-        
          $.ajax({
                                     url: "/rateRestaurant",
                                     type: "POST",
-                                    data: { a: a, restaurantId: restaurantId , restaurant: restaurantName, title: title, comment: comment, rating: ratingValue},
+                                    data: { a: a, restaurantId: restaurantId , restaurant: restaurantName, title: title, comment: comment, rating: ratingValue, image: profileImage},
                                     //contentType: "application/json",
                                     complete: function() {
                                      //called when complete

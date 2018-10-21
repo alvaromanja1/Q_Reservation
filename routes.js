@@ -6,7 +6,10 @@ var urlResponseHandlers = require("./urlResponseHandler");
 var controller = require("./controller");
 var dbConfig = require('./database.config');
 var mongoose = require('mongoose');
-
+bodyParser = {
+  json: {limit: '500mb', extended: true},
+  urlencoded: {limit: '500mb', extended: true}
+};
 module.exports = (app) => {
     const user = require('./urlResponseHandler');
     const restaurant = require('./urlResponseHandler');
@@ -52,6 +55,8 @@ module.exports = (app) => {
     app.post('/getAdminRestaurantOpinions', restaurantOpinion.getAdminRestaurantOpinions);
     
     app.post('/getUserInfo', user.getUserInfo);
+    
+    app.post('/getRestaurantImage', restaurant.getRestaurantImage);
 
     // Retrieve all Notes
     app.get('/users', user.findAll);

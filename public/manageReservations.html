@@ -96,7 +96,8 @@
                                             html += "<table border='0px'>";
                                         
                                             for (i = 0; i < data.length; ++i) {
-                                                html += '<td><img  class="wrap-pic-blo1 bo-rad-10 hov-img-zoom" src="images/manageRest.jpg" alt="IMG-INTRO"></td>';
+                                                image = data[i].image;
+                                                html += '<td><img id="imgRest" src='+image+'></td>';
                                                // html += '<td class="txt5 color0-hov trans-0-4 m-b-13"">' +data[i]["restaurant"]+'</td>';
                                             }
                                         

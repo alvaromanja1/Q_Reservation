@@ -6,7 +6,8 @@ var RestaurantSchema = mongoose.Schema({
     location: String,
     maxPeople: Number,
     category: String,
-    price: String
+    price: String, 
+    image: String
     
 }, {
     timestamps: true

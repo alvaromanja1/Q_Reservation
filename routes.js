@@ -50,6 +50,8 @@ module.exports = (app) => {
     app.post('/getAdminRestaurantList', restaurant.getAdminRestaurantList);
     
     app.post('/getAdminRestaurantOpinions', restaurantOpinion.getAdminRestaurantOpinions);
+    
+    app.post('/getUserInfo', user.getUserInfo);
 
     // Retrieve all Notes
     app.get('/users', user.findAll);

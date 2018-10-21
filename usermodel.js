@@ -5,7 +5,8 @@ var UserSchema = mongoose.Schema({
     username: String,
     email: String,
     password: String, 
-    hasRestaurant: Boolean
+    hasRestaurant: Boolean, 
+    image: String
 }, {
     timestamps: true
 });

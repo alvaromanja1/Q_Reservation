@@ -115,10 +115,11 @@
                                             html += "<table border='0px'>";
                                         
                                             for (i = 0; i < data.length; ++i) {
-                                                html += '<td><img src="images/avatar-01.jpg" alt="IGM-AVATAR"></td>';
+                                                image = data[i].image;
+                                                html += '<td><img id="img" src='+image+'></td>';
+                                                
                                                // html += '<td class="txt5 color0-hov trans-0-4 m-b-13"">' +data[i]["restaurant"]+'</td>';
                                             }
-                                        
                                             html += makeTr(data, "username", "");
                                             html += makeTr(data, "title", "Title:   ");
                                             html += makeTr(data, "comment", "Comment:   ");

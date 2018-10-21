@@ -33,11 +33,51 @@
 </head>
     
 <script>
-    
+    var imageBase64;
+        function readURL(input) {
+            
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                    imageBase64 = e.target.result;
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
     
     window.onload = function() {
       var a = getQueryVariable("username");
       document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
+        
+         $.ajax({
+                                    url: "/getUserInfo",
+                                    type: "POST",
+                                    data: { a: a },
+                                    //contentType: "application/json",
+                                    complete: function() {
+                                     //called when complete
+                                    console.log('process complete');
+                                    },
+                                    success: function(data, error, jqXHR) {
+                                       var profileImage = data[0].image;
+                                        
+                                        document.getElementById('img')
+                                        .setAttribute(
+                                            'src', profileImage
+                                        );
+
+                                        
+                                     },
+                                    error: function(error, jqXHR) {
+                                    //alert("Incorrect info, please try again");
+                                    //location.href ="index.html";
+                                    console.log('process error');
+                                    }
+                                });
     
     };
     function getQueryVariable(variable)
@@ -116,7 +156,7 @@
           $.ajax({
                                     url: "/restaurant",
                                     type: "POST",
-                                    data: { username: username, name: name, location: location, maxpeople:maxpeople, category: category, price: price },
+                                    data: { username: username, name: name, location: location, maxpeople:maxpeople, category: category, price: price, image: imageBase64 },
                                     //contentType: "application/json",
                                     complete: function() {
                                      //called when complete
@@ -181,7 +221,7 @@
 					<!-- Social -->
 					<div class="social flex-w flex-l-m p-r-20">
                         
-                        <a><img id="accountImage" class="accountImg m-l-21" src="images/icons/faviconQR.png"></a>
+                        <a><img id="img" src=""></a>
                         
                         <div id="accountNameDiv" class="accountName m-l-33 trans-0-4">
                             
@@ -326,6 +366,23 @@
                                     
 								</div>
 							</div>
+                        </div>
+                    
+                        <div class="wrap-btn-booking flex-c-m m-t-6">
+                            
+                            <div class="col-md-5">
+                                <span class="txt9">
+                                    Set the restaurant image
+                                </span>
+                                <div>
+                                    
+                                        
+                                        <input type='file' onchange="readURL(this);" />
+                                            <img id="blah" class="profileImage" />
+                                      <!--<input type="file" name="pic" accept="image/*"> -->
+                                    
+                                </div>
+                            </div>
                         </div>
                         
                         <br/>

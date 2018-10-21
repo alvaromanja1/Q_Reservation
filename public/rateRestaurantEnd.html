@@ -44,6 +44,32 @@
       var result = decodeURI(restaurantName);
       document.getElementById("restaurantName").innerHTML = "Rate " +restaurant;
       document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
+        
+         $.ajax({
+                                    url: "/getUserInfo",
+                                    type: "POST",
+                                    data: { a: a },
+                                    //contentType: "application/json",
+                                    complete: function() {
+                                     //called when complete
+                                    console.log('process complete');
+                                    },
+                                    success: function(data, error, jqXHR) {
+                                       var profileImage = data[0].image;
+                                        
+                                        document.getElementById('img')
+                                        .setAttribute(
+                                            'src', profileImage
+                                        );
+
+                                        
+                                     },
+                                    error: function(error, jqXHR) {
+                                    //alert("Incorrect info, please try again");
+                                    //location.href ="index.html";
+                                    console.log('process error');
+                                    }
+                                });
     
     };
     
@@ -200,7 +226,7 @@
 					<!-- Social -->
 					<div class="social flex-w flex-l-m p-r-20">
                         
-                        <a><img id="accountImage" class="accountImg m-l-21" src="images/icons/faviconQR.png"></a>
+                        <a><img id="img" src=""></a>
                         
                         <div id="accountNameDiv" class="accountName m-l-33 trans-0-4">
                             

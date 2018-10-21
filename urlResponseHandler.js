@@ -29,7 +29,8 @@ exports.create = (req, res) => {
         username: req.body.username, 
         email: req.body.email, 
         password: req.body.password, 
-        hasRestaurant: req.body.hasRestaurant
+        hasRestaurant: req.body.hasRestaurant, 
+        image: req.body.image
     });
 
     // Save Note in the database
@@ -93,7 +94,8 @@ exports.createRestaurant = (req, res) => {
         location: req.body.location,
         maxPeople: req.body.maxpeople, 
         category: req.body.category, 
-        price: req.body.price
+        price: req.body.price, 
+        image: req.body.image
     });
 
     // Save Note in the database
@@ -234,7 +236,8 @@ exports.rateApp = (req, res) => {
         username: req.body.a, 
         title: req.body.title, 
         comment: req.body.comment, 
-        rating: req.body.rating
+        rating: req.body.rating, 
+        image: req.body.image
     });
 
     // Save Note in the database
@@ -381,6 +384,18 @@ exports.getAdminRestaurantOpinions = (req, res) => {
     .then(rate => {
         res.send(rate);
         console.log(rate);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
+};
+
+exports.getUserInfo = (req, res) => {
+    var user = req.body.a;
+    User.find({"username":  user})
+    .then(user => {
+          res.send(user);
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while retrieving notes."

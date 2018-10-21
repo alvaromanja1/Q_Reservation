@@ -1798,5 +1798,7 @@ p#opinionContent{
 .checked {
     color: orange
 }
-
-
+#img{
+    max-width:50px;
+    max-height:100px;
+}

@@ -4,7 +4,8 @@ var AppRateSchema = mongoose.Schema({
     username: String,
     title: String,
     comment: String,
-    rating: Number
+    rating: Number, 
+    image: String
 }, {
     timestamps: true
 });

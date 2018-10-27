@@ -10,8 +10,14 @@ var Restaurant = require('./restaurantmodel');
 var Reservation = require('./reservationmodel');
 var AppRate = require('./qReservationOpinionmodel');
 var RestaurantRate = require('./restaurantOpinionmodel');
-
-
+var smtpTransport = nodemailer.createTransport({
+    service: "gmail",
+    host: "smtp.gmail.com",
+    auth: {
+        user: "qreservation0@gmail.com",
+        pass: "adminReservation19"
+    }
+});
 // Create and Save a new Note
 exports.create = (req, res) => {
     
@@ -124,6 +130,17 @@ exports.getRestaurants = (req, res) => {
 
 exports.createReservation = (req, res) => {
     
+    var username = req.body.username;
+    var restaurant = req.body.restaurant;
+    var restaurantName = req.body.restaurantName;
+    var date = req.body.date; 
+    var time = req.body.time; 
+    var people = req.body.people;
+    var name = req.body.name;
+    var phone = req.body.phone;
+    var mail = req.body.mail;
+    var image =  req.body.image;
+    
     if(req.body.username == "" && req.body.restaurant == "" && req.body.date == "" && req.body.time == "" && req.body.people == "" && req.body.name == "" && req.body.phone == "" && req.body.mail == "") {
         return res.status(400).send({
             message: "reservation info content can not be empty"
@@ -150,6 +167,25 @@ exports.createReservation = (req, res) => {
     .then(data => {
         res.statusCode = 201;
         res.send(res.statusCode);
+        
+        var mailOptions={
+        to : mail,
+        subject : "Reservation processed" ,
+        text: 'Dear ' +username+', your reservation has been correctly processed. We will be waiting you in '+ restaurantName+ ' restaurant at '+time+' -  '+date+'.'
+        }
+        
+        console.log(mailOptions);
+        smtpTransport.sendMail(mailOptions, function(error, response){
+         if(error){
+            console.log(error);
+             res.end("error");
+         }else{
+            console.log("Message sent: " + response.message);
+         }
+    });
+        
+        
+        
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while creating the Note."

@@ -31,8 +31,12 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
 <!--===============================================================================================-->
-</head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    
+    </head>
     
 <script>
     
@@ -40,6 +44,8 @@
     window.onload = function() {
       var a = getQueryVariable("username");
       document.getElementById("accountNameDiv").innerHTML = "Hi, " +a;
+        
+      
         
          $.ajax({
                                     url: "/getUserInfo",
@@ -77,6 +83,8 @@
                     })
         
                     .done(function(data){ 
+            
+            console.log(data);
                             var trHTML = '';
                     trHTML += 
                                     '<tr><th>' + "" + 
@@ -86,22 +94,23 @@
                     //console.log(json);
             
                     $.each(data, function (key,value) {
-                         trHTML += 
-                            '<tr><th id="restaurantId" hidden="true">'+value._id + '</th><td id="tdPlate" class="name-item-mainmenu txt21">' + value.name + " (" + value.location + ")"+  '</td></tr>';     
+                        trHTML += 
+                            '<tr><td><img id="datatableImage" src="'+value.image+'"></img></td><th id="restaurantId" hidden="true">'+value._id + '</th><td id="tdPlate" class="name-item-mainmenu txt21">' + value.name + " (" + value.location + ")"+  '</td></tr>';     
                       });
                           
                         $('#t01').append(trHTML);
-            
+                        
                         $('#t01').find('tr').click(function(){
                             
                             var clickedText = $(this).text();
                             var restaurant = clickedText.substr(24, clickedText.length);
                             var restaurantId = clickedText.substr(0, 24);
-                            
                             window.location.href = "reservationEnd.html?username=" + a + "&restaurantId=" + restaurantId + "&restaurantName=" + restaurant;
                            
                         });
-                    
+                    $('#t01').DataTable( {
+                        stateSave: true
+                    } );
         
                     });
     };
@@ -294,10 +303,16 @@
 						<div class="item-mainmenu m-b-36">
 							
                             
-                            <table id="t01" border="0">
-                                <tr >
-                
-                                </tr>
+                            <table id="t01" class="display" border="0" style="width:100%">
+                                
+                                 <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Restaurant</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
                             </table>
 					</div>
         
@@ -488,7 +503,7 @@
 
 
 <!--===============================================================================================-->
-	<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>-->
 <!--===============================================================================================-->
 	<script type="text/javascript" src="vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
@@ -511,6 +526,7 @@
 	<script type="text/javascript" src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script type="text/javascript" src="vendor/lightbox2/js/lightbox.min.js"></script>
+    
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
 

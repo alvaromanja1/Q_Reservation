@@ -1806,3 +1806,13 @@ p#opinionContent{
     max-width:250px;
     max-height:200px;
 }
+
+#datatableImage{
+    max-width:250px;
+    max-height:200px;
+}
+
+#tdPlate {
+    text-decoration: underline;
+    color: blue;
+}

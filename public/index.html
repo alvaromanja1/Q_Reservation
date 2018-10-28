@@ -45,14 +45,14 @@
         
                     .done(function(data){ 
                     console.log(data);
-                        function makeTr(data, attrName, attrValue){
+                        function makeTr(data, attrName, attrValue, className){
                                             var html = '';
                                              var i;
 
                                             html += "<tr>";
                                             
                                             for (i = 0; i < data.length; ++i) {
-                                                html += '<td>' +attrValue + data[i][attrName] + '</td>';
+                                                html += '<td class="'+className+'">' +attrValue + data[i][attrName] + '</td>';
                                             }
                                             html += "</tr>";
                                                 return html;
@@ -70,10 +70,10 @@
                                                // html += '<td class="txt5 color0-hov trans-0-4 m-b-13"">' +data[i]["restaurant"]+'</td>';
                                             }
                                         
-                                            html += makeTr(data, "name", "Name: ");
-                                            html += makeTr(data, "location", "Location: ");
-                                            html += makeTr(data, "category", "Category: ");
-                                            html += makeTr(data, "price", "Price: ");
+                                            html += makeTr(data, "name", "Name: ", "t-center m-b-13 titleFont");
+                                            html += makeTr(data, "location", "Location: ", "t-center m-b-13 subtitleFont");
+                                            html += makeTr(data, "category", "Category: ", "t-center m-b-13 subtitleFont");
+                                            html += makeTr(data, "price", "Price: ", "t-center m-b-13 subtitleFont");
                                             //html += makeTr(data, "_id");
                                             
 
@@ -84,7 +84,18 @@
 
                                         });
         
+       $.ajax({
+                     type: "GET",
+                     url: 'http://localhost:2000/getTweets',
+                     data: 'data',
+                     dataType: 'json',
+                     contentType: "application/json; charset=UTF-8"
+                    })
         
+                    .done(function(data){ 
+                    console.log(data);
+                       
+                    });
         
         $.ajax({
                      type: "GET",
@@ -442,6 +453,18 @@
 		</div>
                     
                     <p id="restaurantContent"></p>
+
+				
+	</section><br/><br/><br/>
+    
+    	<section class="section-intro">
+		<div class="header-intro parallax100 t-center p-t-135 p-b-158" style="background-image: url(images/twitter.png);">
+			<span class="tit4 t-center p-l-15 p-r-15 p-t-3">
+				QReservation App Tweets
+			</span>
+		</div>
+                    
+                    <p id="tweetContent"></p>
 
 				
 	</section>

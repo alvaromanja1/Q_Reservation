@@ -1816,3 +1816,17 @@ p#opinionContent{
     text-decoration: underline;
     color: blue;
 }
+
+.titleFont{
+    font-size: 25px;
+    color: black;
+    font-weight: bold;
+}
+.subtitleFont{
+    font-size: 17px;
+    color: black;
+}
+#map {
+    height: 100%;
+}
+

@@ -3,7 +3,6 @@
 <head>
 	<title>Log In</title>
 	<meta charset="UTF-8">
-    <meta name="google-signin-client_id" content="494433782828-aln4ntaf8gdnln7eu4mq9tnbkvqshl0n.apps.googleusercontent.com">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
@@ -35,24 +34,6 @@
 <!--===============================================================================================-->
 </head>
     <script>
-        function onSuccess(googleUser) {
-          console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-        }
-        function onFailure(error) {
-          console.log(error);
-        }
-        function renderButton() {
-          gapi.signin2.render('my-signin2', {
-            'scope': 'profile email',
-            'width': 100,
-            'height': 700,
-            'longtitle': true,
-            'theme': 'dark',
-            'onsuccess': onSuccess,
-            'onfailure': onFailure
-          });
-        }
-        
         function log(){
              var userName = $("#usernameField").val(); 
              var passUser = $("#passField").val(); 
@@ -271,8 +252,6 @@
 								Log In
 				        </button>
                     
-                    
-                       <div class="g-signin2" data-width="300" data-height="200" data-longtitle="true">
 				</div>
 			</div>
 

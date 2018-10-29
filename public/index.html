@@ -84,19 +84,6 @@
 
                                         });
         
-       $.ajax({
-                     type: "GET",
-                     url: 'http://localhost:2000/getTweets',
-                     data: 'data',
-                     dataType: 'json',
-                     contentType: "application/json; charset=UTF-8"
-                    })
-        
-                    .done(function(data){ 
-                    console.log(data);
-                       
-                    });
-        
         $.ajax({
                      type: "GET",
                      url: 'http://localhost:2000/getAppOpinion',
@@ -453,18 +440,6 @@
 		</div>
                     
                     <p id="restaurantContent"></p>
-
-				
-	</section><br/><br/><br/>
-    
-    	<section class="section-intro">
-		<div class="header-intro parallax100 t-center p-t-135 p-b-158" style="background-image: url(images/twitter.png);">
-			<span class="tit4 t-center p-l-15 p-r-15 p-t-3">
-				QReservation App Tweets
-			</span>
-		</div>
-                    
-                    <p id="tweetContent"></p>
 
 				
 	</section>

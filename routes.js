@@ -58,7 +58,6 @@ module.exports = (app) => {
     
     app.post('/getRestaurantImage', restaurant.getRestaurantImage);
     
-    app.get('/getTweets', user.getTweets);
 
     // Retrieve all Notes
     app.get('/users', user.findAll);

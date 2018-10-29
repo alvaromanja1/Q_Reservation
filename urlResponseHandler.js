@@ -4,13 +4,7 @@ var assert = require('assert');
 var nodemailer = require('nodemailer');
 var express = require("express");
 var app = express();
-var Twitter = require('twitter');
-var client = new Twitter({
-  consumer_key: 'taBfbARJ2xkxOrvaTrcPfBPsq ',
-  consumer_secret: 'Z460H283ACLyoL3c3I2NlfIuG0uHZLbdFmJKhs6VNysouV2by3 ',
-  access_token_key: '1056601784788094987-KCF5f5mwCU1ywmIDxit1HJ914Xcudz',
-  access_token_secret: 'y0GM1rfrl5aPjLQgQQe2E44XWCPAsp3qfa4OklrCwktnd '
-});
+var geocoder = require('geocoder');
 
 var User = require('./usermodel');
 var Restaurant = require('./restaurantmodel');
@@ -459,10 +453,6 @@ exports.getRestaurantImage = (req, res) => {
             message: err.message || "Some error occurred while retrieving notes."
         });
     });
-};
-
-exports.getTweets = (req, res) => {
-    
 };
 // Retrieve and return all notes from the database.
 exports.findAll = (req, res) => {

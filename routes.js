@@ -6,6 +6,9 @@ var urlResponseHandlers = require("./urlResponseHandler");
 var controller = require("./controller");
 var dbConfig = require('./database.config');
 var mongoose = require('mongoose');
+var swaggerUi = require('swagger-ui-express'),
+    swaggerDocument = require('./swagger.json');
+
 bodyParser = {
   json: {limit: '500mb', extended: true},
   urlencoded: {limit: '500mb', extended: true}
@@ -16,7 +19,9 @@ module.exports = (app) => {
     const reservation = require('./urlResponseHandler');
     const appOpinion = require('./urlResponseHandler');
     const restaurantOpinion = require('./urlResponseHandler');
-
+    
+    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    //app.use('/api/v1', router);
     // Create a new Note
     app.post('/user', user.create);
     

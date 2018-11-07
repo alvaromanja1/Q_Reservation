@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 var bodyParser = require('body-parser');
 var objectId = require('mongodb').ObjectID;
-var urlResponseHandlers = require("./urlResponseHandler");
+//var urlResponseHandlers = require("./urlResponseHandler");
 var controller = require("./controller");
 var dbConfig = require('./database.config');
 var mongoose = require('mongoose');
@@ -14,11 +14,11 @@ bodyParser = {
   urlencoded: {limit: '500mb', extended: true}
 };
 module.exports = (app) => {
-    const user = require('./urlResponseHandler');
-    const restaurant = require('./urlResponseHandler');
-    const reservation = require('./urlResponseHandler');
-    const appOpinion = require('./urlResponseHandler');
-    const restaurantOpinion = require('./urlResponseHandler');
+    const user = require('./user-service');
+    const restaurant = require('./restaurant-service');
+    const reservation = require('./booking-service');
+    const appOpinion = require('./rating-service');
+    const restaurantOpinion = require('./rating-service');
     
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     //app.use('/api/v1', router);
@@ -63,16 +63,4 @@ module.exports = (app) => {
     
     app.post('/getRestaurantImage', restaurant.getRestaurantImage);
     
-
-    // Retrieve all Notes
-    app.get('/users', user.findAll);
-
-    // Retrieve a single Note with noteId
-    app.get('/users/:username', user.findOne);
-
-    // Update a Note with noteId
-    app.put('/users/:username', user.update);
-
-    // Delete a Note with noteId
-    app.delete('/users/:username', user.delete);
 }

@@ -27,13 +27,10 @@
     "application/json"
   ],
   "paths": {
-    "/users": {
+    "/user": {
       "post": {
         "tags": [
-          "Users", 
-          "Restaurants", 
-          "Reservation",
-          "Opinion"
+          "Users"
         ],
         "description": "Create new user in system",
         "parameters": [
@@ -57,32 +54,15 @@
             }
           }
         }
-      },
-      "get": {
-        "tags": [
-          "Users", 
-          "Restaurants", 
-          "Reservation",
-          "Opinion"
-        ],
-        "summary": "Get all users in system",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Users"
-            }
-          }
-        }
       }
     },
-    "/users/{userId}": {
+    "/login": {
       "parameters": [
         {
           "name": "userId",
           "in": "path",
           "required": true,
-          "description": "ID of user that we want to find",
+          "description": "username and password of user that we want to find",
           "type": "string"
         }
       ],
@@ -90,7 +70,7 @@
         "tags": [
           "Users"
         ],
-        "summary": "Get user with given ID",
+        "summary": "Get user with given username and password",
         "responses": {
           "200": {
             "description": "User is found",
@@ -99,22 +79,23 @@
             }
           }
         }
-      },
+      }
+    },
+      "/updatePass": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "description": "Update user pass",
+          "type": "string"
+        }
+      ],
       "put": {
-        "summary": "Update user password with give ID",
         "tags": [
           "Users"
         ],
-        "parameters": [
-          {
-            "name": "user",
-            "in": "body",
-            "description": "User with new values of properties",
-            "schema": {
-              "$ref": "#/definitions/User"
-            }
-          }
-        ],
+        "summary": "Update user pass",
         "responses": {
           "200": {
             "description": "User is updated",
@@ -124,12 +105,436 @@
           }
         }
       }
+    },
+      "/getUserInfo": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "description": "user we want to find",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get user",
+        "responses": {
+          "200": {
+            "description": "User is found",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    },
+    "/restaurant": {
+      "parameters": [
+        {
+          "name": "restaurantId",
+          "in": "path",
+          "required": true,
+          "description": "restaurant we want to create",
+          "type": "string"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "insert restaurant",
+        "responses": {
+          "200": {
+            "description": "restaurant is creates",
+            "schema": {
+              "$ref": "#/definitions/restaurant"
+            }
+          }
+        }
+      }
+    },
+    "/restaurants": {
+      "parameters": [
+        {
+          "name": "restaurantId",
+          "in": "path",
+          "required": true,
+          "description": "restaurant we want to get",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "get restaurant",
+        "responses": {
+          "200": {
+            "description": "restaurant get",
+            "schema": {
+              "$ref": "#/definitions/restaurant"
+            }
+          }
+        }
+      }
+    },
+    "/getNewestRestaurants": {
+      "parameters": [
+        {
+          "name": "restaurantId",
+          "in": "path",
+          "required": true,
+          "description": "Get 3 newest restaurants",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "get last restaurants",
+        "responses": {
+          "200": {
+            "description": "restaurants obtained",
+            "schema": {
+              "$ref": "#/definitions/restaurant"
+            }
+          }
+        }
+      }
+    },
+    "/getRestaurantName": {
+      "parameters": [
+        {
+          "name": "restaurantId",
+          "in": "path",
+          "required": true,
+          "description": "restaurant name we want to obtain",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "get restaurant name",
+        "responses": {
+          "200": {
+            "description": "restaurant name",
+            "schema": {
+              "$ref": "#/definitions/restaurant"
+            }
+          }
+        }
+      }
+    },
+    "/getUserRestaurants": {
+      "parameters": [
+        {
+          "name": "restaurantId",
+          "in": "path",
+          "required": true,
+          "description": "restaurant by userid",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "get restaurant",
+        "responses": {
+          "200": {
+            "description": "restaurant obtained by user id",
+            "schema": {
+              "$ref": "#/definitions/restaurant"
+            }
+          }
+        }
+      }
+    },
+    "/getAdminRestaurantList": {
+      "parameters": [
+        {
+          "name": "restaurantId",
+          "in": "path",
+          "required": true,
+          "description": "restaurant obtained of admin list",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "get admin restaurant",
+        "responses": {
+          "200": {
+            "description": "restaurant obtained",
+            "schema": {
+              "$ref": "#/definitions/restaurant"
+            }
+          }
+        }
+      }
+    },
+    "/getRestaurantImage": {
+      "parameters": [
+        {
+          "name": "restaurantId",
+          "in": "path",
+          "required": true,
+          "description": "get restaurant image",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Restaurants"
+        ],
+        "summary": "get  restaurant image",
+        "responses": {
+          "200": {
+            "description": "restaurant image obtained",
+            "schema": {
+              "$ref": "#/definitions/restaurant"
+            }
+          }
+        }
+      }
+    },
+    "/reservation": {
+      "parameters": [
+        {
+          "name": "reservationId",
+          "in": "path",
+          "required": true,
+          "description": "creation of reservation",
+          "type": "string"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Reservations"
+        ],
+        "summary": "insert reservation",
+        "responses": {
+          "200": {
+            "description": "reservation is created",
+            "schema": {
+              "$ref": "#/definitions/reservation"
+            }
+          }
+        }
+      }
+    },
+    "/getReservations": {
+      "parameters": [
+        {
+          "name": "reservationId",
+          "in": "path",
+          "required": true,
+          "description": "reservationt we want to obtain",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Reservations"
+        ],
+        "summary": "Get Reservation",
+        "responses": {
+          "200": {
+            "description": "Reservations is obtained",
+            "schema": {
+              "$ref": "#/definitions/getReservations"
+            }
+          }
+        }
+      }
+    },
+    "/getReservationInfo": {
+      "parameters": [
+        {
+          "name": "reservationId",
+          "in": "path",
+          "required": true,
+          "description": "get reservation info",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Reservations"
+        ],
+        "summary": "Get reservation info details",
+        "responses": {
+          "200": {
+            "description": "reservation is obtained",
+            "schema": {
+              "$ref": "#/definitions/getReservationInfo"
+            }
+          }
+        }
+      }
+    },
+    "/deleteReservation": {
+      "parameters": [
+        {
+          "name": "reservationId",
+          "in": "path",
+          "required": true,
+          "description": "reservation we want to delete",
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "tags": [
+          "Reservations"
+        ],
+        "summary": "delete reservation",
+        "responses": {
+          "200": {
+            "description": "reservation is deleted",
+            "schema": {
+              "$ref": "#/definitions/deleteReservation"
+            }
+          }
+        }
+      }
+    },
+    "/modifyReservation": {
+      "parameters": [
+        {
+          "name": "reservationId",
+          "in": "path",
+          "required": true,
+          "description": "edit reservation",
+          "type": "string"
+        }
+      ],
+      "put": {
+        "tags": [
+          "Reservations"
+        ],
+        "summary": "edit reservation",
+        "responses": {
+          "200": {
+            "description": "reservation has beed modified",
+            "schema": {
+              "$ref": "#/definitions/modifyReservation"
+            }
+          }
+        }
+      }
+    },
+    "/rateApp": {
+      "parameters": [
+        {
+          "name": "opinionId",
+          "in": "path",
+          "required": true,
+          "description": "App rate we want to create",
+          "type": "string"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Opinions"
+        ],
+        "summary": "insert app rate",
+        "responses": {
+          "200": {
+            "description": "app rate is created",
+            "schema": {
+              "$ref": "#/definitions/rateApp"
+            }
+          }
+        }
+      }
+    },
+    "/rateRestaurant": {
+      "parameters": [
+        {
+          "name": "opinionId",
+          "in": "path",
+          "required": true,
+          "description": "Restaurant rate we want to create",
+          "type": "string"
+        }
+      ],
+      "post": {
+        "tags": [
+          "Opinions"
+        ],
+        "summary": "insert restaurant rate",
+        "responses": {
+          "200": {
+            "description": "restaurant rate is created",
+            "schema": {
+              "$ref": "#/definitions/restaurant"
+            }
+          }
+        }
+      }
+    },
+    "/getAppOpinion": {
+      "parameters": [
+        {
+          "name": "opinionId",
+          "in": "path",
+          "required": true,
+          "description": "rate we want to obtain",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Opinions"
+        ],
+        "summary": "obtain rate",
+        "responses": {
+          "200": {
+            "description": "rate is created",
+            "schema": {
+              "$ref": "#/definitions/getAppOpinion"
+            }
+          }
+        }
+      }
+    },
+    "/getAdminRestaurantOpinions": {
+      "parameters": [
+        {
+          "name": "opinionId",
+          "in": "path",
+          "required": true,
+          "description": "obtain admin restaurants opinion",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Opinions"
+        ],
+        "summary": "Get admin restaurants ratings",
+        "responses": {
+          "200": {
+            "description": "restaurant rates by admin obtained",
+            "schema": {
+              "$ref": "#/definitions/getAdminRestaurantOpinions"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
-    "User": {
+    "Users": {
       "required": [
-        "email",
         "_id"
       ],
       "properties": {
@@ -137,26 +542,109 @@
           "type": "string",
           "uniqueItems": true
         },
-        "email": {
+        "name": {
           "type": "string",
           "uniqueItems": true
         },
-        "lastName": {
+        "username": {
           "type": "string"
         },
-        "firstName": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "hasRestaurant": {
+          "type": "boolean"
+        },
+        "image": {
           "type": "string"
         }
       }
     },"Restaurants": {
-      "type": "array",
-      "$ref": "#/definitions/User"
+        "required": [
+        "_id"
+      ],
+        "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "location": {
+          "type": "string"
+        },
+        "maxPeople": {
+          "type": "number"
+        },
+        "category": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        }
+      }
     },"Reservations": {
-      "type": "array",
-      "$ref": "#/definitions/User"
+      "required": [
+        "_id"
+      ],
+        "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "restaurant": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "date": {
+          "type": "string"
+        },
+        "time": {
+          "type": "string"
+        },
+        "people": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "number"
+        },
+        "mail": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        }
+      }
     },"Opinions": {
-      "type": "array",
-      "$ref": "#/definitions/User"
+      "required": [
+        "_id"
+      ],
+        "properties": {
+        "_id": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "title": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "rating": {
+          "type": "number"
+        }
+        }
     }
   }
 }

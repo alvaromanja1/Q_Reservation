@@ -24,7 +24,7 @@ var smtpTransport = nodemailer.createTransport({
 //Insertar restaurante
 exports.createRestaurant = (req, res) => {
     // Validate request
-    if(req.body.name == "" && req.body.location == "" && req.body.maxpeople == "" && req.body.category == "" && req.body.price == "") {
+    if(req.body.name == "" && req.body.location == "" && req.body.address == "" && req.body.maxpeople == "" && req.body.category == "" && req.body.price == "") {
         return res.status(400).send({
             message: "Restaurant info content can not be empty"
         });
@@ -35,6 +35,7 @@ exports.createRestaurant = (req, res) => {
         username: req.body.username,
         name: req.body.name,
         location: req.body.location,
+        address: req.body.address,
         maxPeople: req.body.maxpeople, 
         category: req.body.category, 
         price: req.body.price, 
@@ -97,6 +98,21 @@ exports.getNewestRestaurants = (req, res) => {
 exports.getRestaurantName = (req, res) => {
     var a = req.body.restaurant;
     Restaurant.find({"_id":  a})
+    .then(restaurant => {
+          res.send(restaurant);
+    }).catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving notes."
+        });
+    });
+};
+
+
+
+exports.getRestaurantDir = (req, res) => {
+    var restaurantId = req.body.restaurantId;
+    console.log(restaurantId);
+    Restaurant.find({"_id":  restaurantId})
     .then(restaurant => {
           res.send(restaurant);
     }).catch(err => {

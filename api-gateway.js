@@ -19,6 +19,7 @@ module.exports = (app) => {
     const reservation = require('./booking-service');
     const appOpinion = require('./rating-service');
     const restaurantOpinion = require('./rating-service');
+    const notification = require('./notification-service');
     
     app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     //app.use('/api/v1', router);
@@ -51,6 +52,8 @@ module.exports = (app) => {
     
     app.get('/getRestaurantName', restaurant.getRestaurantName);
     
+    app.post('/getRestaurantDir', restaurant.getRestaurantDir);
+    
     app.post('/updatePass', user.updatePass);
     
     app.post('/getUserRestaurants', restaurant.getUserRestaurants);
@@ -62,5 +65,7 @@ module.exports = (app) => {
     app.post('/getUserInfo', user.getUserInfo);
     
     app.post('/getRestaurantImage', restaurant.getRestaurantImage);
+    
+    //app.get('/getTweets', notification.getTweets);
     
 }

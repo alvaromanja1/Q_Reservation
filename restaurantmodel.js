@@ -4,6 +4,7 @@ var RestaurantSchema = mongoose.Schema({
     username: String,
     name: String,
     location: String,
+    address: String,
     maxPeople: Number,
     category: String,
     price: String, 

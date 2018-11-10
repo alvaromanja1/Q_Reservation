@@ -58,8 +58,8 @@ exports.rateRestaurant = (req, res) => {
         });
     }
     
-    console.log(req.body.restaurant);
-console.log(req.body.image);
+    //console.log(req.body.restaurant);
+//console.log(req.body.image);
     // Create a Note
     const restaurantRate = new RestaurantRate({
         username: req.body.a, 
@@ -88,7 +88,7 @@ exports.getAppOpinion = (req, res) => {
 
     AppRate.find()
     .then(rate => {
-        console.log(rate);
+        //console.log(rate);
         res.send(rate);
     }).catch(err => {
         res.status(500).send({
@@ -104,7 +104,7 @@ exports.getAdminRestaurantOpinions = (req, res) => {
     RestaurantRate.find({"restaurantId":  restaurantId})
     .then(rate => {
         res.send(rate);
-        console.log(rate);
+        //console.log(rate);
     }).catch(err => {
         res.status(500).send({
             message: err.message || "Some error occurred while retrieving notes."

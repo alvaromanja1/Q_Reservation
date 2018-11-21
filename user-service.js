@@ -2,8 +2,11 @@ var MongoClient = require('mongodb').MongoClient;
 var conversionsXML = "";
 var assert = require('assert');
 var nodemailer = require('nodemailer');
+var cookieSession = require('cookie-session');
+var cookieParser = require('cookie-parser');
 var express = require("express");
 var app = express();
+app.use(cookieParser())
 var geocoder = require('geocoder');
 
 var User = require('./usermodel');
@@ -67,7 +70,9 @@ exports.login = (req, res) => {
                 message: "Note not found with id "
             });            
         }
-        
+        crypt = Buffer.from(req.body.password).toString('base64')
+        res.cookie('username', req.body.username); //Sets name = express
+        res.cookie('password', crypt);
         res.statusCode = 201;
         res.send(user);
     }).catch(err => {
@@ -112,4 +117,10 @@ exports.getUserInfo = (req, res) => {
         });
     });
 };
+
+exports.outApp = (req, res) => {
+    res.clearCookie("username");
+    res.clearCookie("password");
+    res.send(201);
+}
 

@@ -137,6 +137,29 @@
         var a = getQueryVariable("username");
         document.getElementById("navigationRR").setAttribute('href', 'rateRestaurant.html?username=' + a);
     }
+        function logo(){
+        var a = getQueryVariable("username");
+                 $.ajax({
+                                    url: "/outApp",
+                                    type: "POST",
+                                    data: { a: a },
+                                    //contentType: "application/json",
+                                    complete: function() {
+                                     //called when complete
+                                    console.log('process complete');
+                                    },
+                                    success: function(data, error, jqXHR) {
+    
+                                        window.location.href = "index.html";
+                                        
+                                     },
+                                    error: function(error, jqXHR) {
+                                    //alert("Incorrect info, please try again");
+                                    //location.href ="index.html";
+                                    console.log('process error');
+                                    }
+                                });
+    }
     
 </script>    
 <body class="animsition">
@@ -221,7 +244,7 @@
 				<a onclick="navigateCP()" id="navigationCP" href="changePassword.html" class="txt19">Change Password</a>
 			</li>
 			<li class="t-center m-b-13">
-				<a href="index.html" class="txt19">Log out</a>
+				<a onclick="logo()" class="txt19">Log out</a>
 			</li>
 
 			<li class="t-center">

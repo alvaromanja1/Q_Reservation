@@ -66,6 +66,8 @@ module.exports = (app) => {
     
     app.post('/getRestaurantImage', restaurant.getRestaurantImage);
     
+    app.post('/outApp', user.outApp);
+    
     //app.get('/getTweets', notification.getTweets);
     
 }

@@ -3,10 +3,10 @@ var conversionsXML = "";
 var assert = require('assert');
 var nodemailer = require('nodemailer');
 var cookieSession = require('cookie-session');
-var cookieParser = require('cookie-parser');
 var express = require("express");
+var cookieParser = require('cookie-parser');
 var app = express();
-app.use(cookieParser())
+app.use(cookieParser());
 var geocoder = require('geocoder');
 
 var User = require('./usermodel');
@@ -89,7 +89,6 @@ exports.login = (req, res) => {
 
 
 exports.updatePass = (req, res) => {
-    
     var username = req.body.username; 
     var oldPass = req.body.oldPass; 
     var newPass = req.body.newPass;
@@ -122,5 +121,37 @@ exports.outApp = (req, res) => {
     res.clearCookie("username");
     res.clearCookie("password");
     res.send(201);
-}
+};
+
+exports.getNumUsers = (req, res) => {
+    User.count({}, function(err, numUsers) {
+        console.log('Count is ' + numUsers);
+        numUsers = numUsers +" users!!";
+        res.statusCode = 201;
+        res.send(numUsers);
+        
+    });
+    
+};
+/*
+exports.valitadeLogin = (req, res, next) => {
+
+    console.log(req.cookies);
+    var pass = req.cookies.password;
+    var username = req.cookies.username;
+    
+    var decode = Buffer.from(pass, 'base64').toString('ascii');
+    User.findOne({"username": username, "password" : decode})
+        .then(user => {
+            if(!user)   res.sendStatus(401);
+            else {
+                req.currentUser = user;
+                return next();
+            }
+
+        }).catch(err => {
+        res.sendStatus(401);
+    });
+};
+*/
 

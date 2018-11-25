@@ -68,6 +68,8 @@ module.exports = (app) => {
     
     app.post('/outApp', user.outApp);
     
+    app.get('/numUsers', user.getNumUsers);
+    
     //app.get('/getTweets', notification.getTweets);
     
 }

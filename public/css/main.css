@@ -1832,3 +1832,13 @@ p#opinionContent{
 .margin_left{
     margin-left: 41%;
 }
+#numUsers{
+    border-radius: 5px;
+    background: #b3b3b3;
+    font-size: 25px;
+    width: 25%;
+    height: 30%;
+    margin-top:3%;
+    margin-left:38%;
+    font-family:monospace;
+}

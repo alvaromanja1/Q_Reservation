@@ -1,3 +1,10 @@
+var socket = io.connect('http://localhost:2000');
+
+
+
+socket.on('test', function(data){
+   alert(data); 
+});
 
 (function ($) {
     "use strict";

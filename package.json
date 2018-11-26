@@ -37,6 +37,8 @@
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.6.3",
     "react-table": "^6.8.6",
+    "socket.io": "^2.1.1",
+    "sse": "0.0.8",
     "swagger-ui-express": "^4.0.1",
     "swift": "0.1.8",
     "twit": "^2.2.11",

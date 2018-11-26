@@ -79,7 +79,6 @@ exports.getNewestRestaurants = (req, res) => {
         
         res.statusCode = 201;
         res.send(restaurant);
-          console.log(restaurant);
     }).catch(err => {
         if(err.kind === 'ObjectId') {
             return res.status(404).send({
@@ -111,7 +110,6 @@ exports.getRestaurantName = (req, res) => {
 
 exports.getRestaurantDir = (req, res) => {
     var restaurantId = req.body.restaurantId;
-    console.log(restaurantId);
     Restaurant.find({"_id":  restaurantId})
     .then(restaurant => {
           res.send(restaurant);

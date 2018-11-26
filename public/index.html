@@ -29,12 +29,15 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+    
 <!--===============================================================================================-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.dev.js"></script>
+    
 </head>
 
     <script>
     window.onload = function() {
-    
+       
         $.ajax({
                      type: "GET",
                      url: 'http://localhost:2000/getNewestRestaurants',
@@ -206,11 +209,11 @@
 								</li>
 
 								<li>
-									<a href="blog.html">Blog</a>
+									<a>Blog</a>
 								</li>
 
 								<li>
-									<a href="contact.html">Contact</a>
+									<a>Contact</a>
 								</li>
 							</ul>
 						</nav>
@@ -687,6 +690,8 @@
 <!--===============================================================================================-->
 	<script type="text/javascript" src="vendor/slick/slick.min.js"></script>
 	<script type="text/javascript" src="js/slick-custom.js"></script>
+    
+    
 <!--===============================================================================================-->
 	<script type="text/javascript" src="vendor/parallax100/parallax100.js"></script>
 	<script type="text/javascript">

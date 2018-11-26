@@ -1,6 +1,8 @@
 // Load the express library, which we installed using npm
 var express = require("express");
 var app = express();
+//var server = require('http').Server(app);
+var socket = require('socket.io');
 var bodyParser = require('body-parser');
 var objectId = require('mongodb').ObjectID;
 //var urlResponseHandlers = require("./urlResponseHandler");
@@ -30,9 +32,21 @@ mongoose.connect(dbConfig.url, {
     process.exit();
 });
 
+
 require('./api-gateway')(app);
 
 var port = process.env.PORT || 2000;
-app.listen(port, function(){
+var server = app.listen(port, function(){
   console.log("Listening on " + port);
+});
+
+var io = socket(server);
+io.on('connection', function(socket) {
+	console.log('A new client has been connected');
+    
+    socket.on('test', function(data){
+        console.log(data.data + "Dataname");
+        var message = data.data + " restaurant has been added to the app, please let's have a look."
+        socket.broadcast.emit('test', message);
+    });
 });
